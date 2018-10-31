@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
 import './normalize.css';
-import Main from './components/Main';
+import Giphy from './components/Giphy';
+import Header from './components/Header';
 
 class App extends Component {
   render() {
     return (
       <div className="wrapper">
         <div className="container">
-          <Main />
+          <Header />>
+          <Giphy />
         </div>
       </div>
     )

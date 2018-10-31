@@ -12,9 +12,17 @@ img {
   height: auto;
 }
 
+main {
+  color: #fff;
+}
+
 p,ul,h1,h2,h3,h4,h5 {
   margin: 0;
   padding: 0;
+}
+
+ul {
+  list-style-type: none;
 }
 
 h1 {
@@ -47,21 +55,11 @@ h1 {
   font-size: 3.2rem;
 }
 
-.category {
+.giphy__list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
-.category__item {
-  flex-basis: 24%;
-  margin-bottom: 1rem;
+.giphy__item {
+  width: 25%;
 }
-
-.category__item img {
-  opacity: 0.3;
-}
-
-
-
-
