@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Category from './Category';
 
 class Giphy extends Component {
 
@@ -7,8 +8,6 @@ class Giphy extends Component {
     this.state = {
       giphy_array: ""
     }
-  }
-  componentDidMount() {
     this.getApi();
   }
   getApi = async (e) => {
@@ -17,15 +16,16 @@ class Giphy extends Component {
     // const search = "japan";
     // const data = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${api_key}&limit=${artist_count}`);
     const data = await fetch(`http://api.giphy.com/v1/gifs/trending?api_key=${api_key}&limit=50`);
+     console.log(data);
     if(data.status === 200) {
       const json = await data.json();
-      console.log(json.data);
+      console.log(json);
       const giphys = [];
       json.data.sort((a, b) => {
         return (a.title > b.title ? 1 : -1);
       });
       json.data.forEach(giphy => {
-        console.log(json.data);
+        // console.log(json.data);
         giphys.push(
             <li key={giphy.id} className="giphy__item">
               <p>@{giphy.username}</p>
@@ -41,10 +41,14 @@ class Giphy extends Component {
       console.log(e);
     }
   }
+  test = () => {
+    console.log("test");
+  }
 
   render () {
     return (
       <main>
+        <Category test={this.test} />
         <ul className="giphy__list">
          {this.state.giphy_array}
         </ul>

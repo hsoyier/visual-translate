@@ -5,9 +5,9 @@ class Category extends Component {
   render() {
     return (
       <div>
-        test
+        {this.props.test()}
       </div>
-    )
+    );
   }
 }
 
