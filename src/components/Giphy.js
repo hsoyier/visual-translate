@@ -1,14 +1,35 @@
 import React, { Component } from 'react';
-import Category from './Category';
+import Tags from './Tags';
 
 class Giphy extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      giphy_array: ""
+      giphy_array: "",
+      tag_array: ["test1", "test2", "test3"],
+      tag: ""
     }
     this.getApi();
+  }
+  // inputTag = (e) => {
+  //   e.preventDefault();
+  //   const input = e.target.value;
+  //   console.log(input);
+  //   this.setState({
+  //     tag: input
+  //   })
+  // }
+  addTag = (e) => {
+    e.preventDefault();
+    const { tag_array } = this.state;
+    const newArray = this.newArray.value;
+
+    this.setState({
+      tag_array: [...tag_array, newArray]
+    })
+
+    this.addForm.reset();
   }
   getApi = async (e) => {
     const api_key = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
@@ -41,16 +62,19 @@ class Giphy extends Component {
       console.log(e);
     }
   }
-  test = () => {
-    console.log("test");
-  }
-
+ 
   render () {
+    const {giphy_array, tag_array} = this.state;
     return (
       <main>
-        <Category test={this.test} />
+        <form ref={input => this.addForm = input} onSubmit={this.addTag}>
+          <input ref={input => this.newArray = input} type="text" placeholder="New tag?" />
+          <button type="submit">Add</button>
+        </form>
+        {tag_array}
+        <Tags tag_array={tag_array} />
         <ul className="giphy__list">
-         {this.state.giphy_array}
+         {giphy_array}
         </ul>
       </main>
     );
