@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Tags from './Tags';
+import PropTypes from 'prop-types';
 
 class Giphy extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -12,14 +11,6 @@ class Giphy extends Component {
     }
     this.getApi();
   }
-  // inputTag = (e) => {
-  //   e.preventDefault();
-  //   const input = e.target.value;
-  //   console.log(input);
-  //   this.setState({
-  //     tag: input
-  //   })
-  // }
   addTag = (e) => {
     e.preventDefault();
     const { tag_array } = this.state;
@@ -37,10 +28,10 @@ class Giphy extends Component {
     // const search = "japan";
     // const data = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${api_key}&limit=${artist_count}`);
     const data = await fetch(`http://api.giphy.com/v1/gifs/trending?api_key=${api_key}&limit=50`);
-     console.log(data);
+    //  console.log(data);
     if(data.status === 200) {
       const json = await data.json();
-      console.log(json);
+      // console.log(json);
       const giphys = [];
       json.data.sort((a, b) => {
         return (a.title > b.title ? 1 : -1);
@@ -72,7 +63,6 @@ class Giphy extends Component {
           <button type="submit">Add</button>
         </form>
         {tag_array}
-        <Tags tag_array={tag_array} />
         <ul className="giphy__list">
          {giphy_array}
         </ul>
@@ -81,5 +71,13 @@ class Giphy extends Component {
   }
 
 }
+
+// Giphy.defaultProps = {
+//   name: 'Stranger'
+// };
+
+// Giphy.propTypes = {
+//   name: PropTypes.string
+// };
 
 export default Giphy;
