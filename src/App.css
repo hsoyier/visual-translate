@@ -69,18 +69,3 @@ h1 {
 .giphy__item {
   width: 25%;
 }
-
-.tags__list {
-  padding: 3rem 0;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  align-items: flex-start;
-}
-
-.tags__item {
-  width: 22%;
-  background: #666;
-  padding: 4rem;
-  margin-bottom: 1.4rem;
-}
