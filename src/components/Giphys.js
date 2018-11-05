@@ -14,7 +14,9 @@ const Giphys = (props) => {
             <button onClick={props.addFav} type="submit" value={giphy.id} >Favorite</button>
             <button><Link to={{ 
               pathname: `/giphys/${giphy.id}`,
-              state: { giphy: giphy.title },
+              state: { 
+                giphy_id: giphy.id
+              },
              }}>Link</Link></button>
           </li>;
         })};

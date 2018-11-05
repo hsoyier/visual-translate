@@ -1,25 +1,39 @@
 import React, { Component } from 'react';
+import Header from './Header';
+import Footer from './Footer';
 
 const API_KEY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 
 export default class Giphy extends Component {
   state = {
-    giphy: [],
+    giphy: null,
+    giphy_img: undefined,
+    giphy_source: undefined
   }
-  componentDidMount = async () => {
-    const giphy = this.props.location.state.giphy;
-    const req = await fetch(`http://api.giphy.com/v1/gifs/search?q=${giphy}&api_key=${API_KEY}`);
+  componentWillMount = async () => {
+    const giphy_id = this.props.location.state.giphy_id;
+    const req = await fetch(`http://api.giphy.com/v1/gifs/${giphy_id}?api_key=${API_KEY}`);
     const res = await req.json();
     this.setState({
-      giphy: res.data[0],
-    })    
-    console.log(this.state.giphy.images.original.url);
+      giphy: res.data
+    })   
+    this.setState({
+      giphy_title: this.state.giphy.title,
+      giphy_img: this.state.giphy.images.original.url,
+      giphy_source: this.state.giphy.source
+    })
   }
   render() {
+    const { giphy, giphy_title, giphy_img, giphy_source } = this.state;
     return (
-      <div>
-        <p>{this.state.giphy.id}</p>
-        {/* <img src={this.state.giphy.images.original.url} alt=""/> */}
+      <div className="wrapper">
+        <div className="container">
+          <Header />
+          <p>{giphy_title}</p>
+          <p>{giphy_source}</p>
+          <img src={giphy_img} alt="a" />
+          <Footer />
+        </div>
       </div>
     )
   }
