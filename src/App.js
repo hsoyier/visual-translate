@@ -9,12 +9,13 @@ import Giphys from './components/Giphys';
 const API_KEY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 const ARTIST_COUNT = 25;
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       giphy_list: [],
       searchword: "",
+      favorite_list: [],
     }
     this.getApi();
   }
@@ -36,6 +37,13 @@ class App extends Component {
       searchword: search,
     })    
   }
+  addFav = (e) => {
+    e.preventDefault();
+    const addFav = e.target.value;
+    this.setState({
+      favorite_list: this.state.favorite_list.concat(addFav),
+    })
+  }
   render () {
     const {giphy_list, searchword} = this.state;
     return (
@@ -43,7 +51,7 @@ class App extends Component {
           <div className="container">
             <Header />
             <SearchForm searchGiphy={this.searchGiphy} />
-            <Giphys giphy_list={giphy_list} searchword={searchword} />
+            <Giphys giphy_list={giphy_list} searchword={searchword} addFav={this.addFav} />
             <Footer />
           </div>
         </div>
@@ -51,5 +59,3 @@ class App extends Component {
   }
 
 }
-
-export default App;
