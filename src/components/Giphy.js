@@ -24,7 +24,7 @@ export default class Giphy extends Component {
     })
   }
   render() {
-    const { giphy, giphy_title, giphy_img, giphy_source } = this.state;
+    const { giphy_title, giphy_img, giphy_source } = this.state;
     return (
       <div className="wrapper">
         <div className="container">

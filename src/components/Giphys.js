@@ -9,9 +9,8 @@ const Giphys = (props) => {
       <ul className="giphy__list">
         {props.giphy_list.map(giphy => {
           return <li className="giphy__item" key={giphy.id}>
-            <img src={giphy.images.original.url} alt={giphy.title} className="" />
+            <img src={giphy.images.fixed_width.url} alt={giphy.title} />
             <p>{giphy.title}</p>
-            <button onClick={props.addFav} type="submit" value={giphy.id} >Favorite</button>
             <button><Link to={{ 
               pathname: `/giphys/${giphy.id}`,
               state: { 
@@ -26,7 +25,8 @@ const Giphys = (props) => {
 }
 
 Giphys.propTypes = {
-  giphy_list: PropTypes.array
+  giphy_list: PropTypes.array,
+  searchword: PropTypes.string
 }
 
 export default Giphys;
