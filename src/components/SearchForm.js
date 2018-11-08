@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 const SearchForm = props => {
   return (
-    <div>
+    <div className="searchForm">
       <form onSubmit={props.searchGiphy} > 
-        <input type="text" name="searchGiphy" />
-        <input type="submit" value="search" />
+        <input className="search-input" type="text" name="searchGiphy" placeholder="Search Giphy!!" />
+        <input className="search-button" type="submit"  value="Search" />
       </form>
     </div>
   )

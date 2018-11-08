@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 const Giphys = (props) => {
   return (
-    <div>
-      <h3>{props.searchword}</h3>
+    <main>
+      <h3 className="giphy__title">{props.searchword}</h3>
       <ul className="giphy__list">
         {props.giphy_list.map(giphy => {
           return <li className="giphy__item" key={giphy.id}>
@@ -20,7 +20,7 @@ const Giphys = (props) => {
           </li>;
         })};
       </ul>
-    </div>
+    </main>
   );
 }
 

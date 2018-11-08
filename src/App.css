@@ -49,9 +49,25 @@ h1 {
   padding: 1.6rem 0;
 }
 
+.search-input {
+  background: #fff;
+  padding: 2rem;
+  width: 20%;
+}
+
+.search-button {
+  width: 62px;
+  height: 62px;
+  cursor: pointer;
+  background: #34b750;
+  color: #fff;
+  border: none;
+}
+
 .topics {
   display: flex;
   overflow: hidden;
+  margin: 4rem 0;
 }
 
 .topics__item {

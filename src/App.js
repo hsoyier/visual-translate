@@ -56,7 +56,6 @@ export default class App extends Component {
     this.setState({
       topicFirstImage: topicImages
     })    
-    console.log(this.state.topicFirstImage);
   }
   handleTopic = async (e) => {
     e.preventDefault();
