@@ -6,6 +6,7 @@ import Topics from './components/Topics';
 import Footer from './components/Footer';
 import SearchForm from './components/SearchForm';
 import Giphys from './components/Giphys';
+var unirest = require('unirest');
 
 const API_KEY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 const ARTIST_COUNT = 100;
@@ -23,6 +24,19 @@ export default class App extends Component {
     }
     this.getApi();
     this.getTopicFirstImage();
+    this.SearchTranslate();
+  }
+  SearchTranslate = () => {
+    // const api_call = await fetch(`https://wordsapiv1.p.mashape.com/words/life`);
+    // const json = await api_call.json();
+    // console.log(json);
+    // These code snippets use an open-source library. http://unirest.io/nodejs
+    unirest.get("https://wordsapiv1.p.mashape.com/words/example")
+    .header("X-Mashape-Key", "WoAmKo0QVemshgMdu2IOI7brF2uZp1RQP4Ejsn5eT2fyJvoQcK")
+    .header("Accept", "application/json")
+    .end(function (result) {
+      console.log(result.status, result.headers, result.body.word);
+    });
   }
   getApi = async (e) => {
     const search = "japan";
