@@ -13,7 +13,7 @@ var unirest = require('unirest');
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 const API_KEY_WORDS = "zxEaJYkQ3tmshQQch8HAQiX9T8bjp12MWApjsn6Z3tJS2MB1bl";
 const API_HOST = "https://wordsapiv1.p.mashape.com";
-const ARTIST_COUNT = 10;
+const GIPHY_COUNT = 50;
 const topicKeyWords = [
   "celebrity", "food", "animal", "travel", "programming"
 ]
@@ -37,11 +37,15 @@ export default class App extends Component {
     .header("X-Mashape-Host", API_HOST)
     .end(function (result) {
       console.log(result.status, result.headers, result.body.results[0].definition);
+      const definition = result.body.results[0].definition;
+      this.setState({
+        definition: definition
+      })
     });
   }
   getApi = async (e) => {
-    const search = "japan";
-    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${ARTIST_COUNT}`);
+    // http://api.giphy.com/v1/gifs/trending?api_key=GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ
+    const api_call = await fetch(`http://api.giphy.com/v1/gifs/trending?api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`);
     const json = await api_call.json();
     this.setState({
       giphy_list: json.data
@@ -51,7 +55,7 @@ export default class App extends Component {
     e.preventDefault();
     const search = e.target.elements.searchGiphy.value;
     this.searchTranslate(search); 
-    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${ARTIST_COUNT}`);
+    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`);
     const json = await api_call.json();
     this.setState({
       giphy_list: json.data,
@@ -62,7 +66,7 @@ export default class App extends Component {
     const topicImages = [];
     let topicImageInfo = {};
     for (const keyword of topicKeyWords) {
-      const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${API_KEY_GIPHY}&limit=${ARTIST_COUNT}`);
+      const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`);
       const json = await api_call.json();
       const image = json.data[0].images.fixed_height.url;
       const id = json.data[0].id;
@@ -97,7 +101,7 @@ export default class App extends Component {
         break;
       }
     search = topic;
-    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${ARTIST_COUNT}`);
+    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`);
     const json = await api_call.json();
     this.setState({
       giphy_list: json.data,

@@ -32,7 +32,7 @@ h1 {
 }
 
 .container {
-  width: 980px;
+  width: 1080px;
   height: auto;
   margin: 0 auto;
 }
@@ -42,10 +42,6 @@ h1 {
 }
 
 .header-inner {
-  width: 980px;
-  height: auto;
-  margin: 0 auto;
-  overflow: hidden;
   padding: 1.6rem 0;
 }
 
@@ -161,11 +157,27 @@ h1 {
   font-size: 3.2rem;
 }
 
+.searchword {
+  padding: 2rem 0;
+  font-size: 5rem;
+}
+
 .giphy__list {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
 }
 
 .giphy__item {
   width: 25%;
+}
+
+.giphy__item a {
+  text-decoration: none;
+}
+
+.giphy__title {
+  color: #fff;
+  line-height: 2.5rem;
+  padding: 1rem 0;
 }
