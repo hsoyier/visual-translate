@@ -9,11 +9,11 @@ class Definition extends Component {
             ? <p className="errorMs">{this.props.message}</p>
             : <div className="definition">
                 <h2 className="definition__title">Definition of {this.props.searchword}</h2>
-                <ol className="definition__list"> 
+                <ul className="definition__list"> 
                     { this.props.definitions.map((def, index) => {            
                   return <li key={index} className="definition__item">{def}</li>
                   })}
-                </ol>
+                </ul>
              </div>
           }
       </div>

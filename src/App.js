@@ -45,9 +45,7 @@ export default class App extends Component {
       this.setState({
         definitions: [],
         message: "Such words do not exist"
-      });
-      console.log(this.state.message);
-      
+      });      
     }
   }
   getApi = async (e) => {
