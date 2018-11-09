@@ -64,6 +64,15 @@ h1 {
   border: none;
 }
 
+.definition {
+  padding: 2rem 0;
+}
+
+.definition__text {
+  font-size: 4rem;
+  line-height: 6rem;
+}
+
 .topics {
   display: flex;
   overflow: hidden;

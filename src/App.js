@@ -3,13 +3,17 @@ import './normalize.css';
 import './App.css';
 import Header from './components/Header';
 import Topics from './components/Topics';
-import Footer from './components/Footer';
 import SearchForm from './components/SearchForm';
 import Giphys from './components/Giphys';
+import Definition from './components/Definition';
+import Footer from './components/Footer';
+
 var unirest = require('unirest');
 
-const API_KEY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
-const ARTIST_COUNT = 100;
+const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
+const API_KEY_WORDS = "zxEaJYkQ3tmshQQch8HAQiX9T8bjp12MWApjsn6Z3tJS2MB1bl";
+const API_HOST = "https://wordsapiv1.p.mashape.com";
+const ARTIST_COUNT = 10;
 const topicKeyWords = [
   "celebrity", "food", "animal", "travel", "programming"
 ]
@@ -20,27 +24,24 @@ export default class App extends Component {
     this.state = {
       giphy_list: [],
       searchword: "",
-      topicFirstImage: []
+      topicFirstImage: [],
+      definition: ""
     }
     this.getApi();
     this.getTopicFirstImage();
-    this.SearchTranslate();
   }
-  SearchTranslate = () => {
-    // const api_call = await fetch(`https://wordsapiv1.p.mashape.com/words/life`);
-    // const json = await api_call.json();
-    // console.log(json);
+  searchTranslate = async searchWord => {
     // These code snippets use an open-source library. http://unirest.io/nodejs
-    unirest.get("https://wordsapiv1.p.mashape.com/words/example")
-    .header("X-Mashape-Key", "WoAmKo0QVemshgMdu2IOI7brF2uZp1RQP4Ejsn5eT2fyJvoQcK")
-    .header("Accept", "application/json")
+    await unirest.get(`http://cors-anywhere.herokuapp.com/https://wordsapiv1.p.mashape.com/words/${searchWord}`)
+    .header("X-Mashape-Key", API_KEY_WORDS)
+    .header("X-Mashape-Host", API_HOST)
     .end(function (result) {
-      console.log(result.status, result.headers, result.body.word);
+      console.log(result.status, result.headers, result.body.results[0].definition);
     });
   }
   getApi = async (e) => {
     const search = "japan";
-    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY}&limit=${ARTIST_COUNT}`);
+    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${ARTIST_COUNT}`);
     const json = await api_call.json();
     this.setState({
       giphy_list: json.data
@@ -49,18 +50,19 @@ export default class App extends Component {
   searchGiphy = async (e) => {
     e.preventDefault();
     const search = e.target.elements.searchGiphy.value;
-    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY}&limit=${ARTIST_COUNT}`);
+    this.searchTranslate(search); 
+    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${ARTIST_COUNT}`);
     const json = await api_call.json();
     this.setState({
       giphy_list: json.data,
       searchword: search
-    })    
+    })   
   }
   getTopicFirstImage = async () => {
     const topicImages = [];
     let topicImageInfo = {};
     for (const keyword of topicKeyWords) {
-      const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${API_KEY}&limit=${ARTIST_COUNT}`);
+      const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${API_KEY_GIPHY}&limit=${ARTIST_COUNT}`);
       const json = await api_call.json();
       const image = json.data[0].images.fixed_height.url;
       const id = json.data[0].id;
@@ -95,7 +97,7 @@ export default class App extends Component {
         break;
       }
     search = topic;
-    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY}&limit=${ARTIST_COUNT}`);
+    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${ARTIST_COUNT}`);
     const json = await api_call.json();
     this.setState({
       giphy_list: json.data,
@@ -103,12 +105,13 @@ export default class App extends Component {
     })    
   }
   render () {
-    const {giphy_list, searchword, topicFirstImage} = this.state;
+    const {giphy_list, searchword, topicFirstImage, definition} = this.state;
     return (
         <div className="wrapper">
           <div className="container">
             <Header />
             <SearchForm searchGiphy={this.searchGiphy} />
+            <Definition definition={definition} />
             <Topics handleTopic={this.handleTopic} topicFirstImage={topicFirstImage} />
             <Giphys giphy_list={giphy_list} searchword={searchword} />
             <Footer />

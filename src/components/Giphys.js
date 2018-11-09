@@ -6,9 +6,10 @@ const Giphys = (props) => {
   return (
     <main>
       <h3 className="giphy__title">{props.searchword}</h3>
-      <ul className="giphy__list">
+      <ul className="giphy__list grid">
         {props.giphy_list.map(giphy => {
-          return <li className="giphy__item" key={giphy.id}>
+          return (
+          <li className="giphy__item" key={giphy.id}>
             <img src={giphy.images.fixed_width.url} alt={giphy.title} />
             <p>{giphy.title}</p>
             <button><Link to={{ 
@@ -17,7 +18,8 @@ const Giphys = (props) => {
                 giphy_id: giphy.id
               },
              }}>Link</Link></button>
-          </li>;
+          </li>
+          );
         })};
       </ul>
     </main>
