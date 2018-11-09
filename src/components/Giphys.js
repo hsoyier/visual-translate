@@ -21,7 +21,7 @@ const Giphys = (props) => {
               </Link>
             </li>
             );
-          })};
+          })}
         </ul>
       </main>
     );

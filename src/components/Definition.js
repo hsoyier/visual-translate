@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Definition = (props) => {
-  return (
-    <div className="definition">
-      <ul className="definition__list">
-        { props.definitions.map((def, i) => <li key={i} className="definition__item">{def}</li>) }
-      </ul>
-    </div>
-  )
+class Definition extends Component {
+  render() {
+    return (
+      <div>
+          {
+            this.props.definitions.length === 0
+            ? <p className="errorMs">{this.props.message}</p>
+            : <div className="definition">
+                <h2 className="definition__title">Definition of {this.props.searchword}</h2>
+                <ol className="definition__list"> 
+                    { this.props.definitions.map((def, index) => {            
+                  return <li key={index} className="definition__item">{def}</li>
+                  })}
+                </ol>
+             </div>
+          }
+      </div>
+    );
+  }
 }
 
 export default Definition;

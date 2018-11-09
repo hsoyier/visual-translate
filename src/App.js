@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 const API_KEY_WORDS = "zxEaJYkQ3tmshQQch8HAQiX9T8bjp12MWApjsn6Z3tJS2MB1bl";
 const API_HOST = "https://wordsapiv1.p.mashape.com";
-const GIPHY_COUNT = 5;
+const GIPHY_COUNT = 8;
 const topicKeyWords = [
   "celebrity", "food", "animal", "travel", "programming"
 ]
@@ -23,7 +23,8 @@ export default class App extends Component {
       giphy_list: [],
       searchword: "",
       topicFirstImage: [],
-      definitions: []
+      definitions: [],
+      message: ""
     }
     this.getApi();
     this.getTopicFirstImage();
@@ -34,18 +35,22 @@ export default class App extends Component {
       "X-Mashape-Host": API_HOST,
     });
     const response = await fetch(`http://cors-anywhere.herokuapp.com/https://wordsapiv1.p.mashape.com/words/${searchWord}`, {headers : header});
-    if (response.status === 200) {
+    if (response.status === 200) {      
       const json = await response.json();
       const definitions = json.results.map(def => def.definition);
       this.setState({
         definitions
       });
     } else {
-
+      this.setState({
+        definitions: [],
+        message: "Such words do not exist"
+      });
+      console.log(this.state.message);
+      
     }
   }
   getApi = async (e) => {
-    // http://api.giphy.com/v1/gifs/trending?api_key=GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ
     const api_call = await fetch(`http://api.giphy.com/v1/gifs/trending?api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`);
     const json = await api_call.json();
     this.setState({
@@ -110,13 +115,13 @@ export default class App extends Component {
     })    
   }
   render () {
-    const {giphy_list, searchword, topicFirstImage, definitions} = this.state;
+    const {giphy_list, searchword, topicFirstImage, definitions, message} = this.state;
     return (
         <div className="wrapper">
           <div className="container">
             <Header />
             <SearchForm searchGiphy={this.searchGiphy} />
-            <Definition definitions={definitions} />
+            <Definition definitions={definitions} message={message} />
             {/* <Topics handleTopic={this.handleTopic} topicFirstImage={topicFirstImage} /> */}
             <Giphys giphy_list={giphy_list} searchword={searchword} />
             <Footer />

@@ -60,12 +60,22 @@ h1 {
   border: none;
 }
 
+.errorMs {
+  font-size: 2.5rem;
+  margin-top: 3rem;
+}
+
 .definition {
-  padding: 2rem 0;
+  padding: 4rem 0;
+}
+
+.definition__title {
+  margin-bottom: 2rem;
 }
 
 .definition__item {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  line-height: 1.4rem;
   margin-bottom: 1rem;
 }
 
