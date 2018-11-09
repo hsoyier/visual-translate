@@ -17,6 +17,7 @@ const GIPHY_COUNT = 50;
 const topicKeyWords = [
   "celebrity", "food", "animal", "travel", "programming"
 ]
+let definition;
 
 export default class App extends Component {
   constructor(props) {
@@ -37,11 +38,11 @@ export default class App extends Component {
     .header("X-Mashape-Host", API_HOST)
     .end(function (result) {
       console.log(result.status, result.headers, result.body.results[0].definition);
-      const definition = result.body.results[0].definition;
-      this.setState({
-        definition: definition
-      })
+      definition = result.body.results[0].definition;
     });
+    this.setState({
+      definition: definition
+    })
   }
   getApi = async (e) => {
     // http://api.giphy.com/v1/gifs/trending?api_key=GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ
