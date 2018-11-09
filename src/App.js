@@ -118,8 +118,10 @@ export default class App extends Component {
         <div className="wrapper">
           <div className="container">
             <Header />
-            <SearchForm searchGiphy={this.searchGiphy} />
-            <Definition definitions={definitions} message={message} />
+            <section className="search">
+              <SearchForm searchGiphy={this.searchGiphy} />
+              <Definition definitions={definitions} message={message} />
+            </section>
             {/* <Topics handleTopic={this.handleTopic} topicFirstImage={topicFirstImage} /> */}
             <Giphys giphy_list={giphy_list} searchword={searchword} />
             <Footer />

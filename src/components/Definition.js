@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Definition extends Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
           {
             this.props.definitions.length === 0
             ? <p className="errorMs">{this.props.message}</p>
@@ -16,7 +16,7 @@ class Definition extends Component {
                 </ul>
              </div>
           }
-      </div>
+      </React.Fragment>
     );
   }
 }
