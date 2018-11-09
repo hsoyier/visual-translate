@@ -3,9 +3,9 @@ import React from 'react';
 const Definition = (props) => {
   return (
     <div className="definition">
-      <p className="definition__text">
-        {props.definition}
-      </p>
+      <ul className="definition__list">
+        { props.definitions.map((def, i) => <li key={i} className="definition__item">{def}</li>) }
+      </ul>
     </div>
   )
 }

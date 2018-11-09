@@ -8,8 +8,6 @@ import Giphys from './components/Giphys';
 import Definition from './components/Definition';
 import Footer from './components/Footer';
 
-var unirest = require('unirest');
-
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 const API_KEY_WORDS = "zxEaJYkQ3tmshQQch8HAQiX9T8bjp12MWApjsn6Z3tJS2MB1bl";
 const API_HOST = "https://wordsapiv1.p.mashape.com";
@@ -25,23 +23,26 @@ export default class App extends Component {
       giphy_list: [],
       searchword: "",
       topicFirstImage: [],
-      definition: ""
+      definitions: []
     }
     this.getApi();
     this.getTopicFirstImage();
   }
-  searchTranslate = searchWord => {
-    // These code snippets use an open-source library. http://unirest.io/nodejs
-    unirest.get(`http://cors-anywhere.herokuapp.com/https://wordsapiv1.p.mashape.com/words/${searchWord}`)
-    .header("X-Mashape-Key", API_KEY_WORDS)
-    .header("X-Mashape-Host", API_HOST)
-    .end((result) => {
-      console.log(result.status, result.headers, result.body.results[4].definition);
-      let definition = result.body.results[0].definition;
+  searchTranslate = async (searchWord) => {
+    const header = new Headers({
+      "X-Mashape-Key": API_KEY_WORDS,
+      "X-Mashape-Host": API_HOST,
+    });
+    const response = await fetch(`http://cors-anywhere.herokuapp.com/https://wordsapiv1.p.mashape.com/words/${searchWord}`, {headers : header});
+    if (response.status === 200) {
+      const json = await response.json();
+      const definitions = json.results.map(def => def.definition);
       this.setState({
-        definition: definition
+        definitions
       });
-    }); 
+    } else {
+
+    }
   }
   getApi = async (e) => {
     // http://api.giphy.com/v1/gifs/trending?api_key=GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ
@@ -109,13 +110,13 @@ export default class App extends Component {
     })    
   }
   render () {
-    const {giphy_list, searchword, topicFirstImage, definition} = this.state;
+    const {giphy_list, searchword, topicFirstImage, definitions} = this.state;
     return (
         <div className="wrapper">
           <div className="container">
             <Header />
             <SearchForm searchGiphy={this.searchGiphy} />
-            <Definition definition={definition} />
+            <Definition definitions={definitions} />
             {/* <Topics handleTopic={this.handleTopic} topicFirstImage={topicFirstImage} /> */}
             <Giphys giphy_list={giphy_list} searchword={searchword} />
             <Footer />
