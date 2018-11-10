@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const Header = (props) => {
   return (
@@ -9,11 +8,6 @@ const Header = (props) => {
       </div>
     </header>
   )
-}
-
-Header.propTypes = {
-  handleTopic: PropTypes.func,
-  topicFirstImage: PropTypes.array
 }
 
 export default Header;

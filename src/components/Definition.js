@@ -1,26 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class Definition extends Component {
-  render() {
+const Definition = (props) => {
     return (
       <React.Fragment>
           {
-            this.props.definitions.length === 0
-            ? <p className="errorMs">{this.props.message}</p>
+            props.definitions.length === 0
+            ? <p className="errorMs">{props.message}</p>
             : <div className="definition">
-                <h2 className="definition__title">Definition of {this.props.searchword}</h2>
+                <h2 className="definition__title">Definition of {props.searchword}</h2>
                 <ul className="definition__list"> 
-                    { this.props.definitions.map((def, index) => {            
+                    { props.definitions.map((def, index) => {            
                   return <li key={index} className="definition__item">{def}</li>
                   })}
                 </ul>
              </div>
           }
       </React.Fragment>
-    );
-  }
+    );       
 }
 
-export default Definition;
+Definition.propTypes = {
+  message: PropTypes.string,
+  definitions: PropTypes.array,
+}
+  
+  export default Definition;
 
 
