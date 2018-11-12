@@ -9,8 +9,12 @@ import Definition from './components/Definition';
 import Footer from './components/Footer';
 
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
-const API_KEY_WORDS = "zxEaJYkQ3tmshQQch8HAQiX9T8bjp12MWApjsn6Z3tJS2MB1bl";
-const API_HOST = "https://wordsapiv1.p.mashape.com";
+// const API_KEY_WORDS = "zxEaJYkQ3tmshQQch8HAQiX9T8bjp12MWApjsn6Z3tJS2MB1bl";
+// const API_HOST = "https://wordsapiv1.p.mashape.com";
+
+const API_KEY_WORDS = "e6f2dcb1a8455b5c827f8ac025b46da2";
+const API_ID = "d7646a99";
+
 const GIPHY_COUNT = 3;
 const topicKeyWords = [
   "celebrity", "food", "animal", "travel", "programming"
@@ -31,23 +35,48 @@ export default class App extends Component {
   }
   searchTranslate = async (searchWord) => {
     const header = new Headers({
-      "X-Mashape-Key": API_KEY_WORDS,
-      "X-Mashape-Host": API_HOST,
+      "Accept": "application/json",
+      "app_id": API_ID,
+      "app_key": API_KEY_WORDS
     });
-    const response = await fetch(`http://cors-anywhere.herokuapp.com/https://wordsapiv1.p.mashape.com/words/${searchWord}`, {headers : header});
+
+    const response = await fetch(`http://cors-anywhere.herokuapp.com/https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${searchWord}`, {headers : header});
     if (response.status === 200) {      
       const json = await response.json();
-      const definitions = json.results.map(def => def.definition);
+      const definitions = json.results[0].lexicalEntries.map(def => {
+        return def.entries[0].senses[0].definitions
+      })
+      console.log(definitions);
       this.setState({
         definitions
       });
-    } else {
-      this.setState({
-        definitions: [],
-        message: "Such words do not exist"
-      });      
     }
+    // } else {
+    //   this.setState({
+    //     definitions: [],
+    //     message: "Such words do not exist"
+    //   });      
+    // }
   }
+  // searchTranslate = async (searchWord) => {
+  //   const header = new Headers({
+  //     "X-Mashape-Key": API_KEY_WORDS,
+  //     "X-Mashape-Host": API_HOST,
+  //   });
+  //   const response = await fetch(`http://cors-anywhere.herokuapp.com/https://wordsapiv1.p.mashape.com/words/${searchWord}`, {headers : header});
+  //   if (response.status === 200) {      
+  //     const json = await response.json();
+  //     const definitions = json.results.map(def => def.definition);
+  //     this.setState({
+  //       definitions
+  //     });
+  //   } else {
+  //     this.setState({
+  //       definitions: [],
+  //       message: "Such words do not exist"
+  //     });      
+  //   }
+  // }
   getApi = async (e) => {
     const api_call = await fetch(`http://api.giphy.com/v1/gifs/trending?api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`);
     const json = await api_call.json();

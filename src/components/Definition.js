@@ -6,16 +6,16 @@ const Definition = (props) => {
       <section className="definition">
           {
             props.definitions.length === 0
-            ? <p className="errorMs">{props.message}</p>
-            : 
-              <React.Fragment>
-              <h2 className="definition__title">Definition of {props.searchword}</h2>
-              <ul className="definition__list"> 
-                  { props.definitions.map((def, index) => {            
-                return <li key={index} className="definition__item">{def}</li>
-                })}
-              </ul> 
-              </React.Fragment>
+              ? <p className="errorMs">{props.message}</p>
+              : 
+                <div className="definition__box">
+                  <h2 className="definition__title">Definition of {props.searchword}</h2>
+                  <ul className="definition__list"> 
+                      { props.definitions.map((def, index) => {            
+                    return <li key={index} className="definition__item">- {def}</li>
+                    })}
+                  </ul> 
+                </div>
           }
       </section>
     );       
