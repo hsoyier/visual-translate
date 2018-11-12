@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 const API_KEY_WORDS = "zxEaJYkQ3tmshQQch8HAQiX9T8bjp12MWApjsn6Z3tJS2MB1bl";
 const API_HOST = "https://wordsapiv1.p.mashape.com";
-const GIPHY_COUNT = 8;
+const GIPHY_COUNT = 3;
 const topicKeyWords = [
   "celebrity", "food", "animal", "travel", "programming"
 ]
@@ -57,7 +57,7 @@ export default class App extends Component {
   }
   searchGiphy = async (e) => {
     e.preventDefault();
-    const search = e.target.elements.searchGiphy.value;
+    const search = e.target.value;
     this.searchTranslate(search); 
     const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`);
     const json = await api_call.json();
@@ -117,11 +117,11 @@ export default class App extends Component {
     return (
         <div className="wrapper">
           <div className="container">
-            <Header />
-            <section className="search">
+            <Header />  
+            <div className="searchBox">
               <SearchForm searchGiphy={this.searchGiphy} />
               <Definition definitions={definitions} message={message} />
-            </section>
+            </div>
             {/* <Topics handleTopic={this.handleTopic} topicFirstImage={topicFirstImage} /> */}
             <Giphys giphy_list={giphy_list} searchword={searchword} />
             <Footer />
