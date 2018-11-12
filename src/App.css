@@ -217,3 +217,32 @@ h1 {
   line-height: 2.5rem;
   padding: 1rem 0;
 }
+
+@media (max-width: 640px) {
+  .container {
+    width: 100%;
+  }
+  .title {
+    padding-left: 1rem;
+  }
+  .searchBox {
+    display: block;
+  }
+  .search {
+    display: block;
+  }
+  .definition {
+    display: block;
+  }
+  .definition__box {
+    display: block;
+    height: auto;
+    padding: 2rem;
+  }
+  .giphy__list {
+    display: block;
+  }
+  .giphy__item {
+    width: 100%;
+  }
+}
