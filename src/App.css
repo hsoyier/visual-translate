@@ -37,12 +37,12 @@ h1 {
   margin: 0 auto;
 }
 
-.header {
-  padding: 1rem 0;
-}
-
 .header-inner {
   padding: 1.6rem 0;
+}
+
+.title {
+  font-size: 3rem;
 }
 
 .searchBox {
@@ -52,19 +52,19 @@ h1 {
 .search {
   flex: 1;
   display: table;
-  background: whitesmoke;
 }
 
 .searchForm {
   display: table-cell;
   vertical-align: middle;
-  height: 360px;
-  text-align: center;
 }
 
 .search-input {
-  font-size: 50px;
+  font-size: 3rem;
   padding: 2rem;
+  min-height: 130px;
+  width: 95%;
+  box-sizing: border-box;
 }
 
 .search-button {
@@ -83,26 +83,24 @@ h1 {
 
 .definition {
   flex: 1;
-  color: #333;
+  color: #fff;
   display: table;
 }
 
 .definition__box {
   display: table-cell;
   vertical-align: middle;
-  height: 360px;
-  background: #b1b1b1;
-  padding: 0 3rem;
+  background: #1a68e8;
+  padding: 1rem 1.4rem;
 }
 
 .definition__title {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .definition__item {
   font-size: 1.6rem;
   line-height: 2.4rem;
-  margin-bottom: 1rem;
 }
 
 .topics {
@@ -189,13 +187,13 @@ h1 {
 
 .title {
   text-align: left;
-  letter-spacing: 0.5rem;
-  font-size: 3.2rem;
+  letter-spacing: 0.2rem;
+  font-size: 2.4rem;
 }
 
 .searchword {
   padding: 2rem 0;
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 .giphy__list {
@@ -225,11 +223,26 @@ h1 {
   .title {
     padding-left: 1rem;
   }
+  .search {
+    display: block;
+  }
   .searchBox {
     display: block;
   }
-  .search {
+  .searchForm {
+    height: auto;
+    width: 100%;
     display: block;
+  }
+  .search-input {
+    font-size: 2.2rem;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: auto;
+    padding: 1.6rem;
+  }
+  .searchword {
+    margin-left: 1rem;
   }
   .definition {
     display: block;
@@ -237,7 +250,8 @@ h1 {
   .definition__box {
     display: block;
     height: auto;
-    padding: 2rem;
+    padding: 1.4rem;
+    box-sizing: border-box;
   }
   .giphy__list {
     display: block;

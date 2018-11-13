@@ -9,7 +9,7 @@ const Definition = (props) => {
               ? <p className="errorMs">{props.message}</p>
               : 
                 <div className="definition__box">
-                  <h2 className="definition__title">Definition of {props.searchword}</h2>
+                  <h2 className="definition__title">Definition{props.searchword}</h2>
                   <ul className="definition__list"> 
                       { props.definitions.map((def, index) => {            
                     return <li key={index} className="definition__item">- {def}</li>
