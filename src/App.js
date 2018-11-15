@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import './normalize.css';
-import './App.css';
-import Header from './components/Header';
-import Topics from './components/Topics';
-import SearchForm from './components/SearchForm';
-import Giphys from './components/Giphys';
-import Definition from './components/Definition';
-import Footer from './components/Footer';
+import React, { Component } from "react";
+import "./normalize.css";
+import "./App.scss";
+import Header from "./components/Header";
+import Topics from "./components/Topics";
+import SearchForm from "./components/SearchForm";
+import Giphys from "./components/Giphys";
+import Definition from "./components/Definition";
+import Footer from "./components/Footer";
 
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 // const API_KEY_WORDS = "zxEaJYkQ3tmshQQch8HAQiX9T8bjp12MWApjsn6Z3tJS2MB1bl";
@@ -16,9 +16,7 @@ const API_KEY_WORDS = "e6f2dcb1a8455b5c827f8ac025b46da2";
 const API_ID = "d7646a99";
 
 const GIPHY_COUNT = 3;
-const topicKeyWords = [
-  "celebrity", "food", "animal", "travel", "programming"
-]
+const topicKeyWords = ["celebrity", "food", "animal", "travel", "programming"];
 
 export default class App extends Component {
   constructor(props) {
@@ -29,23 +27,26 @@ export default class App extends Component {
       topicFirstImage: [],
       definitions: [],
       message: ""
-    }
+    };
     this.getApi();
     this.getTopicFirstImage();
   }
-  searchTranslate = async (searchWord) => {
+  searchTranslate = async searchWord => {
     const header = new Headers({
-      "Accept": "application/json",
-      "app_id": API_ID,
-      "app_key": API_KEY_WORDS
+      Accept: "application/json",
+      app_id: API_ID,
+      app_key: API_KEY_WORDS
     });
 
-    const response = await fetch(`http://cors-anywhere.herokuapp.com/https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${searchWord}`, {headers : header});
-    if (response.status === 200) {      
+    const response = await fetch(
+      `http://cors-anywhere.herokuapp.com/https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${searchWord}`,
+      { headers: header }
+    );
+    if (response.status === 200) {
       const json = await response.json();
       const definitions = json.results[0].lexicalEntries.map(def => {
-        return def.entries[0].senses[0].definitions
-      })
+        return def.entries[0].senses[0].definitions;
+      });
       console.log(definitions);
       this.setState({
         definitions
@@ -55,16 +56,16 @@ export default class App extends Component {
     //   this.setState({
     //     definitions: [],
     //     message: "Such words do not exist"
-    //   });      
+    //   });
     // }
-  }
+  };
   // searchTranslate = async (searchWord) => {
   //   const header = new Headers({
   //     "X-Mashape-Key": API_KEY_WORDS,
   //     "X-Mashape-Host": API_HOST,
   //   });
   //   const response = await fetch(`http://cors-anywhere.herokuapp.com/https://wordsapiv1.p.mashape.com/words/${searchWord}`, {headers : header});
-  //   if (response.status === 200) {      
+  //   if (response.status === 200) {
   //     const json = await response.json();
   //     const definitions = json.results.map(def => def.definition);
   //     this.setState({
@@ -74,43 +75,49 @@ export default class App extends Component {
   //     this.setState({
   //       definitions: [],
   //       message: "Such words do not exist"
-  //     });      
+  //     });
   //   }
   // }
-  getApi = async (e) => {
-    const api_call = await fetch(`http://api.giphy.com/v1/gifs/trending?api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`);
+  getApi = async e => {
+    const api_call = await fetch(
+      `http://api.giphy.com/v1/gifs/trending?api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
+    );
     const json = await api_call.json();
     this.setState({
       giphy_list: json.data
-    })
-  }
-  searchGiphy = async (e) => {
+    });
+  };
+  searchGiphy = async e => {
     e.preventDefault();
     const search = e.target.value;
-    this.searchTranslate(search); 
-    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`);
+    this.searchTranslate(search);
+    const api_call = await fetch(
+      `http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
+    );
     const json = await api_call.json();
     this.setState({
       giphy_list: json.data,
       searchword: search
-    })   
-  }
+    });
+  };
   getTopicFirstImage = async () => {
     const topicImages = [];
     let topicImageInfo = {};
     for (const keyword of topicKeyWords) {
-      const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`);
+      const api_call = await fetch(
+        `http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
+      );
       const json = await api_call.json();
       const image = json.data[0].images.fixed_height.url;
       const id = json.data[0].id;
-      topicImageInfo = {image, id, keyword}
+      topicImageInfo = { image, id, keyword };
       topicImages.push(topicImageInfo);
     }
     this.setState({
       topicFirstImage: topicImages
-    })    
-  }
-  handleTopic = async (e) => {
+    });
+  };
+  handleTopic = async e => {
     e.preventDefault();
     const topic = e.target.name;
     let search = "";
@@ -132,31 +139,38 @@ export default class App extends Component {
         break;
       default:
         break;
-      }
+    }
     search = topic;
-    const api_call = await fetch(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`);
+    const api_call = await fetch(
+      `http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
+    );
     const json = await api_call.json();
     this.setState({
       giphy_list: json.data,
-      searchword: search,
-    })    
-  }
-  render () {
-    const {giphy_list, searchword, topicFirstImage, definitions, message} = this.state;
+      searchword: search
+    });
+  };
+  render() {
+    const {
+      giphy_list,
+      searchword,
+      topicFirstImage,
+      definitions,
+      message
+    } = this.state;
     return (
-        <div className="wrapper">
-          <div className="container">
-            <Header />  
-            <div className="searchBox">
-              <SearchForm searchGiphy={this.searchGiphy} />
-              <Definition definitions={definitions} message={message} />
-            </div>
-            {/* <Topics handleTopic={this.handleTopic} topicFirstImage={topicFirstImage} /> */}
-            <Giphys giphy_list={giphy_list} searchword={searchword} />
-            <Footer />
+      <div className="wrapper">
+        <div className="container">
+          <Header />
+          <div className="searchBox">
+            <SearchForm searchGiphy={this.searchGiphy} />
+            <Definition definitions={definitions} message={message} />
           </div>
+          {/* <Topics handleTopic={this.handleTopic} topicFirstImage={topicFirstImage} /> */}
+          <Giphys giphy_list={giphy_list} searchword={searchword} />
+          <Footer />
         </div>
+      </div>
     );
   }
-
 }

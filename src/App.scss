@@ -1,5 +1,5 @@
-html { 
-  font-size: 62.5%; 
+html {
+  font-size: 62.5%;
 }
 
 body {
@@ -20,7 +20,13 @@ main {
   color: #fff;
 }
 
-p,ul,h1,h2,h3,h4,h5 {
+p,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5 {
   margin: 0;
   padding: 0;
 }
@@ -40,12 +46,13 @@ h1 {
   margin: 0 auto;
 }
 
-.header-inner {
-  padding: 1.6rem 0;
-}
-
-.title {
-  font-size: 3rem;
+.header {
+  .header-inner {
+    padding: 1.6rem 0;
+    .title {
+      font-size: 3rem;
+    }
+  }
 }
 
 .searchBox {
@@ -55,67 +62,51 @@ h1 {
 .search {
   flex: 1;
   display: table;
-}
-
-.searchForm {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.search-input {
-  font-size: 3rem;
-  padding: 2rem;
-  min-height: 130px;
-  width: 95%;
-  box-sizing: border-box;
-}
-
-.search-button {
-  width: 62px;
-  height: 62px;
-  cursor: pointer;
-  background: #34b750;
-  color: #fff;
-  border: none;
-}
-
-.errorMs {
-  font-size: 2.5rem;
-  margin-top: 3rem;
+  .searchForm {
+    display: table-cell;
+    vertical-align: middle;
+    .search-input {
+      font-size: 3rem;
+      padding: 2rem;
+      min-height: 130px;
+      width: 95%;
+      box-sizing: border-box;
+    }
+  }
 }
 
 .definition {
   flex: 1;
   color: #fff;
   display: table;
-}
-
-.definition__box {
-  display: table-cell;
-  vertical-align: middle;
-  background: #1a68e8;
-  padding: 1rem 1.4rem;
-}
-
-.definition__title {
-  margin-bottom: 1rem;
-}
-
-.definition__item {
-  font-size: 1.6rem;
-  line-height: 2.4rem;
+  .errorMs {
+    font-size: 2.5rem;
+    margin-top: 3rem;
+  }
+  .definition__box {
+    display: table-cell;
+    vertical-align: middle;
+    background: #1a68e8;
+    padding: 1rem 1.4rem;
+    .definition__title {
+      margin-bottom: 1rem;
+    }
+    .definition__item {
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+    }
+  }
 }
 
 .topics {
   display: flex;
   overflow: hidden;
   margin: 4rem 0;
-}
-
-.topics__item {
-  position: relative;
-  border: solid 12px black;
-  box-shadow: 0 10px 0 0 #000 inset;
+  .topics__item {
+    position: relative;
+    border: solid 12px black;
+    box-shadow: 0 10px 0 0 #000 inset;
+  }
 }
 
 .topics__item:first-child {
@@ -126,7 +117,7 @@ h1 {
 }
 .topics__item:first-child .topics__title {
   background: aquamarine;
-} 
+}
 .topics__item:nth-child(2) {
   background: magenta;
 }
@@ -135,7 +126,7 @@ h1 {
 }
 .topics__item:nth-child(2) .topics__title {
   background: magenta;
-} 
+}
 .topics__item:nth-child(3) {
   background: salmon;
 }
@@ -144,7 +135,7 @@ h1 {
 }
 .topics__item:nth-child(3) .topics__title {
   background: salmon;
-} 
+}
 .topics__item:nth-child(4) {
   background: yellowgreen;
 }
@@ -153,7 +144,7 @@ h1 {
 }
 .topics__item:nth-child(4) .topics__title {
   background: yellowgreen;
-} 
+}
 .topics__item:last-child {
   background: slateblue;
 }
@@ -162,7 +153,7 @@ h1 {
 }
 .topics__item:last-child .topics__title {
   background: slateblue;
-} 
+}
 
 .topics__item img:hover {
   opacity: 0;
@@ -203,20 +194,17 @@ h1 {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-}
-
-.giphy__item {
-  width: 33.3%;
-}
-
-.giphy__item a {
-  text-decoration: none;
-}
-
-.giphy__title {
-  color: #fff;
-  line-height: 2.5rem;
-  padding: 1rem 0;
+  .giphy__item {
+    width: 33.3%;
+    a {
+      text-decoration: none;
+    }
+    .giphy__title {
+      color: #fff;
+      line-height: 2.5rem;
+      padding: 1rem 0;
+    }
+  }
 }
 
 @media (max-width: 640px) {
@@ -226,40 +214,40 @@ h1 {
   .title {
     padding-left: 1rem;
   }
-  .search {
-    display: block;
-  }
   .searchBox {
     display: block;
   }
-  .searchForm {
-    height: auto;
-    width: 100%;
+  .search {
     display: block;
-  }
-  .search-input {
-    font-size: 2.2rem;
-    width: 100%;
-    box-sizing: border-box;
-    min-height: auto;
-    padding: 1.6rem;
+    .searchForm {
+      height: auto;
+      width: 100%;
+      display: block;
+      .search-input {
+        font-size: 2.2rem;
+        width: 100%;
+        box-sizing: border-box;
+        min-height: auto;
+        padding: 1.6rem;
+      }
+    }
   }
   .searchword {
     margin-left: 1rem;
   }
   .definition {
     display: block;
-  }
-  .definition__box {
-    display: block;
-    height: auto;
-    padding: 1.4rem;
-    box-sizing: border-box;
+    .definition__box {
+      display: block;
+      height: auto;
+      padding: 1.4rem;
+      box-sizing: border-box;
+    }
   }
   .giphy__list {
     display: block;
-  }
-  .giphy__item {
-    width: 100%;
+    .giphy__item {
+      width: 100%;
+    }
   }
 }
