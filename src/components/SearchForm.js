@@ -7,8 +7,8 @@ const SearchForm = props => {
     <section className="search">
       <div className="searchForm">
         <select onChange={props.handleSourceLang}>
-          {props.supportedLanguages.map(lang => {
-            return <option value={lang.language}>{lang.language}</option>;
+          {props.supportedLanguages.map((lang, index) => {
+            return <option value={lang.language}>{Lang[index]}</option>;
           })}
         </select>
         <input

@@ -2,19 +2,14 @@ import React, { Component } from "react";
 import "./normalize.css";
 import "./App.scss";
 import Header from "./components/Header";
-import Topics from "./components/Topics";
 import SearchForm from "./components/SearchForm";
 import Giphys from "./components/Giphys";
 import Definition from "./components/Definition";
 import Footer from "./components/Footer";
 
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
-const API_KEY_WORDS = "e6f2dcb1a8455b5c827f8ac025b46da2";
-const API_ID = "d7646a99";
 const API_KEY_GOOGLE_TRANSLATE = "AIzaSyCWGqzdzr8-hC9ADWYSBfuEPltHUIrekj4";
-
 const GIPHY_COUNT = 3;
-const topicKeyWords = ["celebrity", "food", "animal", "travel", "programming"];
 
 export default class App extends Component {
   constructor(props) {
@@ -22,7 +17,6 @@ export default class App extends Component {
     this.state = {
       giphy_list: [],
       searchword: "",
-      topicFirstImage: [],
       definitions: [],
       message: "",
       sourceLang: "",
@@ -31,36 +25,7 @@ export default class App extends Component {
     };
     this.getApi();
     this.getSupportedLanguages();
-    this.getTopicFirstImage();
   }
-  // searchTranslate = async searchWord => {
-  //   const header = new Headers({
-  //     Accept: "application/json",
-  //     app_id: API_ID,
-  //     app_key: API_KEY_WORDS
-  //   });
-
-  //   const response = await fetch(
-  //     `http://cors-anywhere.herokuapp.com/https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${searchWord}`,
-  //     { headers: header }
-  //   );
-  //   if (response.status === 200) {
-  //     const json = await response.json();
-  //     const definitions = json.results[0].lexicalEntries.map(def => {
-  //       return def.entries[0].senses[0].definitions;
-  //     });
-  //     console.log(definitions);
-  //     this.setState({
-  //       definitions
-  //     });
-  //   }
-  //   // } else {
-  //   //   this.setState({
-  //   //     definitions: [],
-  //   //     message: "Such words do not exist"
-  //   //   });
-  //   // }
-  // };
   getSupportedLanguages = async () => {
     const response = await fetch(
       `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY_GOOGLE_TRANSLATE}`
@@ -86,25 +51,6 @@ export default class App extends Component {
       });
     }
   };
-  // searchTranslate = async (searchWord) => {
-  //   const header = new Headers({
-  //     "X-Mashape-Key": API_KEY_WORDS,
-  //     "X-Mashape-Host": API_HOST,
-  //   });
-  //   const response = await fetch(`http://cors-anywhere.herokuapp.com/https://wordsapiv1.p.mashape.com/words/${searchWord}`, {headers : header});
-  //   if (response.status === 200) {
-  //     const json = await response.json();
-  //     const definitions = json.results.map(def => def.definition);
-  //     this.setState({
-  //       definitions
-  //     });
-  //   } else {
-  //     this.setState({
-  //       definitions: [],
-  //       message: "Such words do not exist"
-  //     });
-  //   }
-  // }
   getApi = async e => {
     const api_call = await fetch(
       `http://api.giphy.com/v1/gifs/trending?api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
@@ -142,61 +88,10 @@ export default class App extends Component {
       targetLang
     });
   };
-  getTopicFirstImage = async () => {
-    const topicImages = [];
-    let topicImageInfo = {};
-    for (const keyword of topicKeyWords) {
-      const api_call = await fetch(
-        `http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
-      );
-      const json = await api_call.json();
-      const image = json.data[0].images.fixed_height.url;
-      const id = json.data[0].id;
-      topicImageInfo = { image, id, keyword };
-      topicImages.push(topicImageInfo);
-    }
-    this.setState({
-      topicFirstImage: topicImages
-    });
-  };
-  handleTopic = async e => {
-    e.preventDefault();
-    const topic = e.target.name;
-    let search = "";
-    switch (topic) {
-      case "celebrity":
-        search = "celebrity";
-        break;
-      case "food":
-        search = "food";
-        break;
-      case "animal":
-        search = "animal";
-        break;
-      case "travel":
-        search = "travel";
-        break;
-      case "programming":
-        search = "programming";
-        break;
-      default:
-        break;
-    }
-    search = topic;
-    const api_call = await fetch(
-      `http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
-    );
-    const json = await api_call.json();
-    this.setState({
-      giphy_list: json.data,
-      searchword: search
-    });
-  };
   render() {
     const {
       giphy_list,
       searchword,
-      topicFirstImage,
       supportedLanguages,
       definitions,
       message
