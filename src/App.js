@@ -9,11 +9,9 @@ import Definition from "./components/Definition";
 import Footer from "./components/Footer";
 
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
-// const API_KEY_WORDS = "zxEaJYkQ3tmshQQch8HAQiX9T8bjp12MWApjsn6Z3tJS2MB1bl";
-// const API_HOST = "https://wordsapiv1.p.mashape.com";
-
 const API_KEY_WORDS = "e6f2dcb1a8455b5c827f8ac025b46da2";
 const API_ID = "d7646a99";
+const API_KEY_GOOGLE_TRANSLATE = "AIzaSyCWGqzdzr8-hC9ADWYSBfuEPltHUIrekj4";
 
 const GIPHY_COUNT = 3;
 const topicKeyWords = ["celebrity", "food", "animal", "travel", "programming"];
@@ -26,38 +24,67 @@ export default class App extends Component {
       searchword: "",
       topicFirstImage: [],
       definitions: [],
-      message: ""
+      message: "",
+      sourceLang: "",
+      targetLang: "",
+      supportedLanguages: []
     };
     this.getApi();
+    this.getSupportedLanguages();
     this.getTopicFirstImage();
   }
-  searchTranslate = async searchWord => {
-    const header = new Headers({
-      Accept: "application/json",
-      app_id: API_ID,
-      app_key: API_KEY_WORDS
-    });
+  // searchTranslate = async searchWord => {
+  //   const header = new Headers({
+  //     Accept: "application/json",
+  //     app_id: API_ID,
+  //     app_key: API_KEY_WORDS
+  //   });
 
+  //   const response = await fetch(
+  //     `http://cors-anywhere.herokuapp.com/https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${searchWord}`,
+  //     { headers: header }
+  //   );
+  //   if (response.status === 200) {
+  //     const json = await response.json();
+  //     const definitions = json.results[0].lexicalEntries.map(def => {
+  //       return def.entries[0].senses[0].definitions;
+  //     });
+  //     console.log(definitions);
+  //     this.setState({
+  //       definitions
+  //     });
+  //   }
+  //   // } else {
+  //   //   this.setState({
+  //   //     definitions: [],
+  //   //     message: "Such words do not exist"
+  //   //   });
+  //   // }
+  // };
+  getSupportedLanguages = async () => {
     const response = await fetch(
-      `http://cors-anywhere.herokuapp.com/https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${searchWord}`,
-      { headers: header }
+      `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY_GOOGLE_TRANSLATE}`
     );
     if (response.status === 200) {
       const json = await response.json();
-      const definitions = json.results[0].lexicalEntries.map(def => {
-        return def.entries[0].senses[0].definitions;
-      });
-      console.log(definitions);
+      const supportedLanguages = json.data.languages;
       this.setState({
-        definitions
+        supportedLanguages
+      });
+      console.log(supportedLanguages);
+    }
+  };
+  searchTranslate = async (searchWord, sourceLang, targetLang) => {
+    const response = await fetch(
+      `https://translation.googleapis.com/language/translate/v2?q=${searchWord}&source=${sourceLang}&target=${targetLang}&key=${API_KEY_GOOGLE_TRANSLATE}`
+    );
+    if (response.status === 200) {
+      const json = await response.json();
+      const translatedText = await json.data.translations[0].translatedText;
+      this.setState({
+        definitions: translatedText
       });
     }
-    // } else {
-    //   this.setState({
-    //     definitions: [],
-    //     message: "Such words do not exist"
-    //   });
-    // }
   };
   // searchTranslate = async (searchWord) => {
   //   const header = new Headers({
@@ -90,7 +117,8 @@ export default class App extends Component {
   searchGiphy = async e => {
     e.preventDefault();
     const search = e.target.value;
-    this.searchTranslate(search);
+    const { sourceLang, targetLang } = this.state;
+    this.searchTranslate(search, sourceLang, targetLang);
     const api_call = await fetch(
       `http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
     );
@@ -98,6 +126,20 @@ export default class App extends Component {
     this.setState({
       giphy_list: json.data,
       searchword: search
+    });
+  };
+  handleSourceLang = e => {
+    const sourceLang = e.target.value;
+    console.log(sourceLang);
+    this.setState({
+      sourceLang
+    });
+  };
+  handleTargetLang = e => {
+    const targetLang = e.target.value;
+    console.log(targetLang);
+    this.setState({
+      targetLang
     });
   };
   getTopicFirstImage = async () => {
@@ -155,6 +197,7 @@ export default class App extends Component {
       giphy_list,
       searchword,
       topicFirstImage,
+      supportedLanguages,
       definitions,
       message
     } = this.state;
@@ -163,8 +206,17 @@ export default class App extends Component {
         <div className="container">
           <Header />
           <div className="searchBox">
-            <SearchForm searchGiphy={this.searchGiphy} />
-            <Definition definitions={definitions} message={message} />
+            <SearchForm
+              searchGiphy={this.searchGiphy}
+              supportedLanguages={supportedLanguages}
+              handleSourceLang={this.handleSourceLang}
+            />
+            <Definition
+              handleTargetLang={this.handleTargetLang}
+              supportedLanguages={supportedLanguages}
+              definitions={definitions}
+              message={message}
+            />
           </div>
           {/* <Topics handleTopic={this.handleTopic} topicFirstImage={topicFirstImage} /> */}
           <Giphys giphy_list={giphy_list} searchword={searchword} />

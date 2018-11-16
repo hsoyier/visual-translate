@@ -3,23 +3,15 @@ import PropTypes from "prop-types";
 
 const Definition = props => {
   return (
-    <section className="definition">
-      {props.definitions.length === 0 ? (
-        <p className="errorMs">{props.message}</p>
-      ) : (
-        <div className="definition__box">
-          <h2 className="definition__title">Definition{props.searchword}</h2>
-          <ul className="definition__list">
-            {props.definitions.map((def, index) => {
-              return (
-                <li key={index} className="definition__item">
-                  - {def}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
+    <section className="search">
+      <select onChange={props.handleTargetLang}>
+        {props.supportedLanguages.map(lang => {
+          return <option value={lang.language}>{lang.language}</option>;
+        })}
+      </select>
+      <div className="targetLang-box">
+        <p className="targetLang-box__text">{props.definitions}</p>
+      </div>
     </section>
   );
 };
