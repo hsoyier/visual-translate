@@ -2,18 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import Lang from "./Lang";
 
-const SearchForm = props => {
+const Search = props => {
   return (
-    <section className="search">
+    <section className="translateBox">
       <div className="searchForm">
         <select onChange={props.handleSourceLang}>
           {props.supportedLanguages.map((lang, index) => {
-            return <option value={lang.language}>{Lang[index]}</option>;
+            return (
+              <option key={index} value={lang.language}>
+                {Lang[index]}
+              </option>
+            );
           })}
         </select>
         <input
           onChange={props.searchGiphy}
-          className="search-input"
+          className="searchForm__input"
           type="text"
           placeholder="Search the word"
         />
@@ -22,8 +26,8 @@ const SearchForm = props => {
   );
 };
 
-SearchForm.propTypes = {
+Search.propTypes = {
   searchGiphy: PropTypes.func
 };
 
-export default SearchForm;
+export default Search;

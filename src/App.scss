@@ -44,10 +44,11 @@ h1 {
   width: 1200px;
   height: auto;
   margin: 0 auto;
+  padding: 1rem 0;
 }
 
 .header {
-  .header-inner {
+  &__inner {
     padding: 1.6rem 0;
     .title {
       font-size: 3rem;
@@ -55,17 +56,17 @@ h1 {
   }
 }
 
-.searchBox {
+.translateCol {
   display: flex;
+  justify-content: space-between;
 }
 
-.search {
-  flex: 1;
+.translateBox {
   display: table;
   .searchForm {
     display: table-cell;
     vertical-align: middle;
-    .search-input {
+    &__input {
       font-size: 3rem;
       padding: 2rem;
       min-height: 130px;
@@ -75,40 +76,7 @@ h1 {
   }
 }
 
-.definition {
-  flex: 1;
-  color: #fff;
-  display: table;
-  .errorMs {
-    font-size: 2.5rem;
-    margin-top: 3rem;
-  }
-  .definition__box {
-    display: table-cell;
-    vertical-align: middle;
-    background: #1a68e8;
-    padding: 1rem 1.4rem;
-    .definition__title {
-      margin-bottom: 1rem;
-    }
-    .definition__item {
-      font-size: 1.6rem;
-      line-height: 2.4rem;
-    }
-  }
-}
-
-.topics {
-  display: flex;
-  overflow: hidden;
-  margin: 4rem 0;
-  .topics__item {
-    position: relative;
-    border: solid 12px black;
-    box-shadow: 0 10px 0 0 #000 inset;
-  }
-}
-.targetLang-box {
+.translateForm {
   width: 570px;
   height: 130px;
   background: #efefef;
@@ -177,15 +145,6 @@ h1 {
   }
   .searchword {
     margin-left: 1rem;
-  }
-  .definition {
-    display: block;
-    .definition__box {
-      display: block;
-      height: auto;
-      padding: 1.4rem;
-      box-sizing: border-box;
-    }
   }
   .giphy__list {
     display: block;

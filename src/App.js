@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import "./normalize.css";
 import "./App.scss";
 import Header from "./components/Header";
-import SearchForm from "./components/SearchForm";
+import Search from "./components/Search";
 import Giphys from "./components/Giphys";
-import Definition from "./components/Definition";
+import Translate from "./components/Translate";
 import Footer from "./components/Footer";
 
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
@@ -17,7 +17,7 @@ export default class App extends Component {
     this.state = {
       giphy_list: [],
       searchword: "",
-      definitions: "",
+      translate: "",
       message: "",
       sourceLang: "en",
       targetLang: "ja",
@@ -52,7 +52,7 @@ export default class App extends Component {
       const json = await response.json();
       const translatedText = await json.data.translations[0].translatedText;
       this.setState({
-        definitions: translatedText
+        translate: translatedText
       });
     }
   };
@@ -117,7 +117,7 @@ export default class App extends Component {
       const json = await response.json();
       const translatedText = await json.data.translations[0].translatedText;
       this.setState({
-        definitions: translatedText
+        translate: translatedText
       });
     }
   };
@@ -126,23 +126,23 @@ export default class App extends Component {
       giphy_list,
       searchword,
       supportedLanguages,
-      definitions,
+      translate,
       message
     } = this.state;
     return (
       <div className="wrapper">
         <div className="container">
           <Header />
-          <div className="searchBox">
-            <SearchForm
+          <div className="translateCol">
+            <Search
               searchGiphy={this.searchGiphy}
               handleSourceLang={this.handleSourceLang}
               supportedLanguages={supportedLanguages}
             />
-            <Definition
+            <Translate
               handleTargetLang={this.handleTargetLang}
               supportedLanguages={supportedLanguages}
-              definitions={definitions}
+              translate={translate}
               message={message}
             />
           </div>
