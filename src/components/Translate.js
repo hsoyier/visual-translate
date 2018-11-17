@@ -1,20 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Lang from "./Lang";
 
 const Translate = props => {
   return (
-    <section className="translateBox">
-      <select onChange={props.handleTargetLang}>
-        {props.supportedLanguages.map((lang, index) => {
-          return (
-            <option key={index} value={lang.language}>
-              {Lang[index]}
-            </option>
-          );
-        })}
-      </select>
-      <div className="translateForm">
+    <section className="translateForm ">
+      <div className="translateForm__box translate">
         <p className="translateForm__text">{props.translate}</p>
       </div>
     </section>
@@ -23,7 +13,7 @@ const Translate = props => {
 
 Translate.propTypes = {
   message: PropTypes.string,
-  definitions: PropTypes.string
+  translate: PropTypes.string
 };
 
 export default Translate;

@@ -3,8 +3,9 @@ import "./normalize.css";
 import "./App.scss";
 import Header from "./components/Header";
 import Search from "./components/Search";
-import Giphys from "./components/Giphys";
 import Translate from "./components/Translate";
+import LanguageSelect from "./components/LanguageSelect";
+import Giphys from "./components/Giphys";
 import Footer from "./components/Footer";
 
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
@@ -24,28 +25,29 @@ export default class App extends Component {
       supportedLanguages: []
     };
     this.getApi();
-    this.getSupportedLanguages();
+    // this.getSupportedLanguages();
   }
-  getSupportedLanguages = async () => {
+  // getSupportedLanguages = async () => {
+  //   const response = await fetch(
+  //     `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY_GOOGLE_TRANSLATE}`
+  //   );
+  //   if (response.status === 200) {
+  //     const json = await response.json();
+  //     const supportedLanguages = json.data.languages;
+  //     this.setState({
+  //       supportedLanguages
+  //     });
+  //   }
+  // };
+  searchTranslate = async (searchword, sourceLang, targetLang) => {
     const response = await fetch(
-      `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY_GOOGLE_TRANSLATE}`
-    );
-    if (response.status === 200) {
-      const json = await response.json();
-      const supportedLanguages = json.data.languages;
-      this.setState({
-        supportedLanguages
-      });
-    }
-  };
-  searchTranslate = async searchWord => {
-    const response = await fetch(
-      `https://translation.googleapis.com/language/translate/v2?q=${searchWord}&source=${
+      `https://translation.googleapis.com/language/translate/v2?q=${searchword}&source=${
         this.state.sourceLang
       }&target=${this.state.targetLang}&key=${API_KEY_GOOGLE_TRANSLATE}`
     );
     if (response.status === 200) {
       const json = await response.json();
+      console.log(json);
       const translatedText = await json.data.translations[0].translatedText;
       this.setState({
         translate: translatedText
@@ -64,7 +66,7 @@ export default class App extends Component {
   searchGiphy = async e => {
     e.preventDefault();
     const search = e.target.value;
-    this.searchTranslate(search);
+    this.searchTranslate(search, this.state.sourceLang, this.state.targetLang);
     const api_call = await fetch(
       `http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
     );
@@ -77,44 +79,26 @@ export default class App extends Component {
   handleSourceLang = async e => {
     e.preventDefault();
     const sourceLang = e.target.value;
+    this.searchTranslate(
+      this.state.searchword,
+      sourceLang,
+      this.state.targetLang
+    );
     this.setState({
       sourceLang
     });
-    const response = await fetch(
-      `https://translation.googleapis.com/language/translate/v2?q=${
-        this.state.searchWord
-      }&source=${this.state.sourceLang}&target=${
-        this.state.targetLang
-      }&key=${API_KEY_GOOGLE_TRANSLATE}`
-    );
-    if (response.status === 200) {
-      const json = await response.json();
-      const translatedText = await json.data.translations[0].translatedText;
-      this.setState({
-        definitions: translatedText
-      });
-    }
   };
   handleTargetLang = async e => {
     e.preventDefault();
     const targetLang = e.target.value;
+    this.searchTranslate(
+      this.state.searchword,
+      this.state.sourceLang,
+      targetLang
+    );
     this.setState({
       targetLang
     });
-    const response = await fetch(
-      `https://translation.googleapis.com/language/translate/v2?q=${
-        this.state.searchWord
-      }&source=${this.state.sourceLang}&target=${
-        this.state.targetLang
-      }&key=${API_KEY_GOOGLE_TRANSLATE}`
-    );
-    if (response.status === 200) {
-      const json = await response.json();
-      const translatedText = await json.data.translations[0].translatedText;
-      this.setState({
-        translate: translatedText
-      });
-    }
   };
   render() {
     const {
@@ -128,18 +112,14 @@ export default class App extends Component {
       <div className="wrapper">
         <div className="container">
           <Header />
+          <LanguageSelect
+            handleSourceLang={this.handleSourceLang}
+            handleTargetLang={this.handleTargetLang}
+            supportedLanguages={supportedLanguages}
+          />
           <div className="translateCol">
-            <Search
-              searchGiphy={this.searchGiphy}
-              handleSourceLang={this.handleSourceLang}
-              supportedLanguages={supportedLanguages}
-            />
-            <Translate
-              handleTargetLang={this.handleTargetLang}
-              supportedLanguages={supportedLanguages}
-              translate={translate}
-              message={message}
-            />
+            <Search searchGiphy={this.searchGiphy} />
+            <Translate translate={translate} message={message} />
           </div>
           <Giphys giphy_list={giphy_list} searchword={searchword} />
           <Footer />
