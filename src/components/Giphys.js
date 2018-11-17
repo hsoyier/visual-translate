@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Giphys = props => {
@@ -10,17 +9,8 @@ const Giphys = props => {
         {props.giphy_list.map(giphy => {
           return (
             <li className="giphy__item" key={giphy.id}>
-              <Link
-                to={{
-                  pathname: `/giphys/${giphy.id}`,
-                  state: {
-                    giphy_id: giphy.id
-                  }
-                }}
-              >
-                <img src={giphy.images.fixed_width.url} alt={giphy.title} />
-                <p className="giphy__title">{giphy.title}</p>
-              </Link>
+              <img src={giphy.images.fixed_width.url} alt={giphy.title} />
+              <p className="giphy__title">{giphy.title}</p>
             </li>
           );
         })}

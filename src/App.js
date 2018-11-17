@@ -36,7 +36,6 @@ export default class App extends Component {
       this.setState({
         supportedLanguages
       });
-      console.log(supportedLanguages);
     }
   };
   searchTranslate = async searchWord => {
@@ -45,10 +44,7 @@ export default class App extends Component {
         this.state.sourceLang
       }&target=${this.state.targetLang}&key=${API_KEY_GOOGLE_TRANSLATE}`
     );
-    console.log(this.state.targetLang, this.state.sourceLang);
     if (response.status === 200) {
-      console.log("success");
-
       const json = await response.json();
       const translatedText = await json.data.translations[0].translatedText;
       this.setState({
@@ -68,7 +64,6 @@ export default class App extends Component {
   searchGiphy = async e => {
     e.preventDefault();
     const search = e.target.value;
-    console.log(search);
     this.searchTranslate(search);
     const api_call = await fetch(
       `http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
