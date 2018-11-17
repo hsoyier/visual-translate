@@ -17,10 +17,10 @@ export default class App extends Component {
     this.state = {
       giphy_list: [],
       searchword: "",
-      definitions: [],
+      definitions: "",
       message: "",
-      sourceLang: "",
-      targetLang: "",
+      sourceLang: "en",
+      targetLang: "ja",
       supportedLanguages: []
     };
     this.getApi();
@@ -39,11 +39,16 @@ export default class App extends Component {
       console.log(supportedLanguages);
     }
   };
-  searchTranslate = async (searchWord, sourceLang, targetLang) => {
+  searchTranslate = async searchWord => {
     const response = await fetch(
-      `https://translation.googleapis.com/language/translate/v2?q=${searchWord}&source=${sourceLang}&target=${targetLang}&key=${API_KEY_GOOGLE_TRANSLATE}`
+      `https://translation.googleapis.com/language/translate/v2?q=${searchWord}&source=${
+        this.state.sourceLang
+      }&target=${this.state.targetLang}&key=${API_KEY_GOOGLE_TRANSLATE}`
     );
+    console.log(this.state.targetLang, this.state.sourceLang);
     if (response.status === 200) {
+      console.log("success");
+
       const json = await response.json();
       const translatedText = await json.data.translations[0].translatedText;
       this.setState({
@@ -63,8 +68,8 @@ export default class App extends Component {
   searchGiphy = async e => {
     e.preventDefault();
     const search = e.target.value;
-    const { sourceLang, targetLang } = this.state;
-    this.searchTranslate(search, sourceLang, targetLang);
+    console.log(search);
+    this.searchTranslate(search);
     const api_call = await fetch(
       `http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
     );
@@ -74,19 +79,47 @@ export default class App extends Component {
       searchword: search
     });
   };
-  handleSourceLang = e => {
+  handleSourceLang = async e => {
+    e.preventDefault();
     const sourceLang = e.target.value;
-    console.log(sourceLang);
     this.setState({
       sourceLang
     });
+    const response = await fetch(
+      `https://translation.googleapis.com/language/translate/v2?q=${
+        this.state.searchWord
+      }&source=${this.state.sourceLang}&target=${
+        this.state.targetLang
+      }&key=${API_KEY_GOOGLE_TRANSLATE}`
+    );
+    if (response.status === 200) {
+      const json = await response.json();
+      const translatedText = await json.data.translations[0].translatedText;
+      this.setState({
+        definitions: translatedText
+      });
+    }
   };
-  handleTargetLang = e => {
+  handleTargetLang = async e => {
+    e.preventDefault();
     const targetLang = e.target.value;
-    console.log(targetLang);
     this.setState({
       targetLang
     });
+    const response = await fetch(
+      `https://translation.googleapis.com/language/translate/v2?q=${
+        this.state.searchWord
+      }&source=${this.state.sourceLang}&target=${
+        this.state.targetLang
+      }&key=${API_KEY_GOOGLE_TRANSLATE}`
+    );
+    if (response.status === 200) {
+      const json = await response.json();
+      const translatedText = await json.data.translations[0].translatedText;
+      this.setState({
+        definitions: translatedText
+      });
+    }
   };
   render() {
     const {
@@ -103,8 +136,8 @@ export default class App extends Component {
           <div className="searchBox">
             <SearchForm
               searchGiphy={this.searchGiphy}
-              supportedLanguages={supportedLanguages}
               handleSourceLang={this.handleSourceLang}
+              supportedLanguages={supportedLanguages}
             />
             <Definition
               handleTargetLang={this.handleTargetLang}
@@ -113,7 +146,6 @@ export default class App extends Component {
               message={message}
             />
           </div>
-          {/* <Topics handleTopic={this.handleTopic} topicFirstImage={topicFirstImage} /> */}
           <Giphys giphy_list={giphy_list} searchword={searchword} />
           <Footer />
         </div>
