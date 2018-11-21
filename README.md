@@ -1,45 +1,84 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Visual Translate
 
-## Available Scripts
+> Visual Translate is the web site to give you the service for not only translating but also showing you Giphy image for visualizing the searched keyword.
 
-In the project directory, you can run:
+![Example screenshot](./src/assets/project_example01.jpg)
 
-### `npm start`
+## Table of contents
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Description](#Description)
+- [Getting started](#Getting-started)
+- [Features](#Features)
+- [Status](#Status)
+- [Links](#Links)
+- [Contact](#Contact)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Description
 
-### `npm test`
+- Visual Translate is a simple translate service using 2 API, Google Translate API and Giphy API.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Depends on your searched keyword You see the response translated word and animation related to the keyword you searched asynchronosly.
 
-### `npm run build`
+- This project is made by React. Managing 2 API at the same time seems tough in terms of the response speed however with React technology the speed is very quick. The viewer is not so disturbed for waiting.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Technologies
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+- HTML5
+- CSS3
+- JavaScript
+- React
+- Sass
+- BEM
+- Webpack
+- Babel
+- Prettier
+- Visual Studio Code
+- Markdown
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### API
 
-### `npm run eject`
+- [Google Translate API](https://cloud.google.com/translate/)
+- [Giphy API](https://developers.giphy.com/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Getting started
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). What you need to do is just install and start like the code below.
+(Remind node is already installed in your computer)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```shell
+npm install
+npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+the most recent version of this guide [here](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md). It shows you the lists of available scripts.
 
-## Learn More
+## Features
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- When you input the keyword and select the source and target language It shows you the translated word.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-# giphy-app
+- Also Giphy animations related to the searched keyword is displayed. So that you can visualize what the searched keyword actually mean.
+
+## Status
+
+Project is: _finished_
+
+## Links
+
+- Project homepage: https://visual-translate.reiyoshizawa.com/
+- Repository: https://github.com/oyyer/visual-translate
+- Issue tracker: https://github.com/oyyer/visual-translate/issues
+  - In case of sensitive bugs like security vulnerabilities, please contact
+    reiyoshizawa0418@email.com directly instead of using issue tracker. We value your effort
+    to improve the security and privacy of this project!
+- Related projects:
+  - Joy Event: https://github.com/oyyer/joyevent
+  - Visual Translat: https://github.com/oyyer/portfolio-react
+
+## Contact
+
+Feel free to contact me!
+
+- Website - Rei Yoshizawa Portfolio Website (https://www.reiyoshizawa.com/)
+- Twitter - @oyyer\_ (https://twitter.com/oyyer_)
+
+[Back To The Top](#Visual-Translate)
