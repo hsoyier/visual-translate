@@ -8,9 +8,18 @@ const Giphys = props => {
       <ul className="giphy__list">
         {props.giphy_list.map(giphy => {
           return (
-            <li className="giphy__item" key={giphy.id}>
-              <img src={giphy.images.fixed_height.url} alt={giphy.title} />
-              <p className="giphy__title">{giphy.title}</p>
+            <li
+              className="giphy__item"
+              key={giphy.id}
+              style={{
+                backgroundImage: `url(
+                  ${giphy.images.fixed_height.url}
+                  )`
+              }}
+            >
+              <a href={giphy.images.original}>
+                <i class="fas fa-paperclip" />
+              </a>
             </li>
           );
         })}
