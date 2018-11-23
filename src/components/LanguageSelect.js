@@ -8,7 +8,7 @@ const LanguageSelect = props => {
           className="langSelect__select"
           onChange={props.handleSourceLang}
         >
-          <option selected>from</option>
+          <option value="">from</option>
           <option value="en">English</option>
           <option value="es">Spanish</option>
           <option value="fr">French</option>
@@ -39,7 +39,7 @@ const LanguageSelect = props => {
           className="langSelect__select"
           onChange={props.handleTargetLang}
         >
-          <option selected>to</option>
+          <option value="">to</option>
           <option value="en">English</option>
           <option value="es">Spanish</option>
           <option value="fr">French</option>

@@ -7,6 +7,7 @@ import Translate from "./components/Translate";
 import LanguageSelect from "./components/LanguageSelect";
 import Giphys from "./components/Giphys";
 import Footer from "./components/Footer";
+import CopyMessage from "./components/CopyMessage";
 
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 const API_KEY_GOOGLE_TRANSLATE = "AIzaSyCWGqzdzr8-hC9ADWYSBfuEPltHUIrekj4";
@@ -108,6 +109,10 @@ export default class App extends Component {
     this.setState({
       isCopiedSuccess: true
     });
+    setTimeout(() => {
+      this.setState({ isCopiedSuccess: false });
+    }, 6000);
+    console.log(this.state.isCopiedSuccess);
   };
   render() {
     const {
@@ -120,8 +125,9 @@ export default class App extends Component {
     } = this.state;
     return (
       <div className="wrapper">
+        <CopyMessage isCopiedSuccess={isCopiedSuccess} />
         <div className="container">
-          <Header isCopiedSuccess={isCopiedSuccess} />
+          <Header />
           <LanguageSelect
             handleSourceLang={this.handleSourceLang}
             handleTargetLang={this.handleTargetLang}

@@ -126,7 +126,7 @@ h1 {
     position: relative;
     height: 300px;
     margin-bottom: 3rem;
-    border-radius: 4%;
+    border-radius: 10px;
     a {
       text-decoration: none;
     }
@@ -157,6 +157,34 @@ h1 {
   border: none;
   cursor: pointer;
   outline: none;
+  border-radius: 0 0 10px 0;
+}
+
+.btn__copy:hover {
+  transition-duration: 0.5s;
+  background: palevioletred;
+  color: #fff;
+}
+
+.copyMessage {
+  position: fixed;
+  width: 100%;
+  background: palevioletred;
+  text-align: center;
+  animation: shrinkBar 1s ease-in-out 0s 1 normal forwards running;
+  z-index: 10;
+  .copyMessage__text {
+    font-size: 2rem;
+  }
+}
+
+@keyframes shrinkBar {
+  0% {
+    padding: 0;
+  }
+  100% {
+    padding: 2rem 0;
+  }
 }
 
 .footer {

@@ -17,9 +17,11 @@ const Giphys = props => {
                   )`
               }}
             >
-              <textarea className="js-copytextarea">
-                {giphy.images.original.url}
-              </textarea>
+              <textarea
+                className="js-copytextarea"
+                value={giphy.images.original.url}
+                readOnly
+              />
               <button className="btn__copy" onClick={props.copyClip}>
                 <i className="fas fa-paperclip fa-lg" />
               </button>
