@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 const API_KEY_GOOGLE_TRANSLATE = "AIzaSyCWGqzdzr8-hC9ADWYSBfuEPltHUIrekj4";
-const GIPHY_COUNT = 6;
+const GIPHY_COUNT = 8;
 
 export default class App extends Component {
   constructor(props) {
@@ -20,8 +20,8 @@ export default class App extends Component {
       searchword: "",
       translate: "",
       message: "",
-      sourceLang: "en",
-      targetLang: "ja",
+      sourceLang: "",
+      targetLang: "",
       supportedLanguages: []
     };
     this.getApi();
@@ -100,18 +100,28 @@ export default class App extends Component {
       targetLang
     });
   };
+  copyClip = e => {
+    e.preventDefault();
+    const copyTextarea = document.querySelector(".js-copytextarea");
+    copyTextarea.select();
+    document.execCommand("copy");
+    this.setState({
+      isCopiedSuccess: true
+    });
+  };
   render() {
     const {
       giphy_list,
       searchword,
       supportedLanguages,
       translate,
-      message
+      message,
+      isCopiedSuccess
     } = this.state;
     return (
       <div className="wrapper">
         <div className="container">
-          <Header />
+          <Header isCopiedSuccess={isCopiedSuccess} />
           <LanguageSelect
             handleSourceLang={this.handleSourceLang}
             handleTargetLang={this.handleTargetLang}
@@ -121,7 +131,11 @@ export default class App extends Component {
             <Search searchGiphy={this.searchGiphy} />
             <Translate translate={translate} message={message} />
           </div>
-          <Giphys giphy_list={giphy_list} searchword={searchword} />
+          <Giphys
+            giphy_list={giphy_list}
+            searchword={searchword}
+            copyClip={this.copyClip}
+          />
           <Footer />
         </div>
       </div>
