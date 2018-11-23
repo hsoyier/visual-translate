@@ -9,7 +9,7 @@ const Giphys = props => {
         {props.giphy_list.map(giphy => {
           return (
             <li className="giphy__item" key={giphy.id}>
-              <img src={giphy.images.fixed_width.url} alt={giphy.title} />
+              <img src={giphy.images.fixed_height.url} alt={giphy.title} />
               <p className="giphy__title">{giphy.title}</p>
             </li>
           );

@@ -72,7 +72,7 @@ Project is: _finished_
     to improve the security and privacy of this project!
 - Related projects:
   - Joy Event: https://github.com/oyyer/joyevent
-  - Visual Translat: https://github.com/oyyer/portfolio-react
+  - Visual Translate: https://github.com/oyyer/portfolio-react
 
 ## Contact
 

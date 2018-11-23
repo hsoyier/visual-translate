@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 const API_KEY_GOOGLE_TRANSLATE = "AIzaSyCWGqzdzr8-hC9ADWYSBfuEPltHUIrekj4";
-const GIPHY_COUNT = 3;
+const GIPHY_COUNT = 6;
 
 export default class App extends Component {
   constructor(props) {
@@ -47,7 +47,6 @@ export default class App extends Component {
     );
     if (response.status === 200) {
       const json = await response.json();
-      console.log(json);
       const translatedText = await json.data.translations[0].translatedText;
       this.setState({
         translate: translatedText
@@ -59,6 +58,7 @@ export default class App extends Component {
       `http://api.giphy.com/v1/gifs/trending?api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
     );
     const json = await api_call.json();
+    console.log(json);
     this.setState({
       giphy_list: json.data
     });
