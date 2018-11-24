@@ -103,8 +103,7 @@ export default class App extends Component {
   };
   copyClip = e => {
     e.preventDefault();
-    const copyTextarea = document.querySelector(".js-copytextarea");
-    copyTextarea.select();
+    const copyTextarea = document.getElementById("js-copytextarea").value;
     document.execCommand("copy");
     this.setState({
       isCopiedSuccess: true
@@ -112,7 +111,6 @@ export default class App extends Component {
     setTimeout(() => {
       this.setState({ isCopiedSuccess: false });
     }, 6000);
-    console.log(this.state.isCopiedSuccess);
   };
   render() {
     const {

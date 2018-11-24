@@ -2,7 +2,7 @@
 
 > Visual Translate is the web site to give you the service for not only translating but also showing you Giphy image for visualizing the searched keyword.
 
-![Example screenshot](./src/assets/project_example01.jpg)
+![Example screenshot](./src/assets/visual_translate.gif)
 
 ## Table of contents
 
