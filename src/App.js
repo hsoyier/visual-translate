@@ -7,7 +7,7 @@ import Translate from "./components/Translate";
 import LanguageSelect from "./components/LanguageSelect";
 import Giphys from "./components/Giphys";
 import Footer from "./components/Footer";
-import CopyMessage from "./components/CopyMessage";
+import Clipboard from "./components/Clipboard";
 
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 const API_KEY_GOOGLE_TRANSLATE = "AIzaSyCWGqzdzr8-hC9ADWYSBfuEPltHUIrekj4";
@@ -85,7 +85,7 @@ export default class App extends Component {
       targetLang
     );
   };
-  copyClip = e => {
+  copyClipboard = e => {
     e.preventDefault();
     const el = document.createElement("textarea");
     el.value = e.target.name;
@@ -99,7 +99,7 @@ export default class App extends Component {
     });
     setTimeout(() => {
       this.setState({ isCopiedSuccess: false });
-    }, 6000);
+    }, 60000);
   };
   render() {
     const {
@@ -111,7 +111,7 @@ export default class App extends Component {
     } = this.state;
     return (
       <div className="wrapper">
-        <CopyMessage
+        <Clipboard
           isCopiedSuccess={isCopiedSuccess}
           giphy_image={giphy_image}
         />
@@ -128,7 +128,7 @@ export default class App extends Component {
           <Giphys
             giphy_list={giphy_list}
             searchword={searchword}
-            copyClip={this.copyClip}
+            copyClipboard={this.copyClipboard}
           />
           <Footer />
         </div>

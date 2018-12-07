@@ -20,7 +20,7 @@ const Giphys = props => {
               <button
                 key={giphy.id}
                 className="btn__copy"
-                onClick={props.copyClip}
+                onClick={props.copyClipboard}
                 name={giphy.images.original.url}
               >
                 <i className="fas fa-paperclip fa-lg" />

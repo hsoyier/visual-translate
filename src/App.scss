@@ -256,4 +256,13 @@ h1 {
       margin-right: 2%;
     }
   }
+  .clipboard {
+    .clipboard-inner {
+      width: 100%;
+      height: auto;
+    }
+    .clipboard__image {
+      display: none;
+    }
+  }
 }
