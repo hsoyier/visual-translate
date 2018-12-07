@@ -1,7 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-const Giphys = props => {
+interface IGiphysProps {
+  searchword: string;
+  giphy_list: [string];
+  copyClipboard: () => void;
+}
+
+const Giphys = (props: IGiphysProps) => {
   return (
     <main>
       <h3 className="searchword">{props.searchword}</h3>
@@ -31,11 +36,6 @@ const Giphys = props => {
       </ul>
     </main>
   );
-};
-
-Giphys.propTypes = {
-  giphy_list: PropTypes.array,
-  searchword: PropTypes.string
 };
 
 export default Giphys;

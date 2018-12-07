@@ -1,8 +1,13 @@
-import React from "react";
+import * as React from "react";
+
+interface ICopyMessageProps {
+  isCopiedSuccess: boolean;
+  giphy_image: string;
+}
 
 const copyMessage = "Link copied to clipboard";
 
-const CopyMessage = props => {
+const CopyMessage = (props: ICopyMessageProps) => {
   if (props.isCopiedSuccess) {
     return (
       <div className="clipboard">
