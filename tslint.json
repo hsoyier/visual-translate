@@ -1,7 +1,10 @@
 {
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "rules": {
-    "member-access": false
+    "member-access": false,
+    "no-console": false,
+    "no-string-literal": false,
+    "variable-name": false
   },
   "linterOptions": {
     "exclude": [

@@ -14,7 +14,7 @@ const GIPHY_COUNT = 8;
 
 interface IState {
   giphy_image: string;
-  giphy_list: [string];
+  giphy_list: [any];
   isCopiedSuccess: boolean;
   searchword: string;
   sourceLang: string;
@@ -43,19 +43,6 @@ export default class App extends React.Component<{}, IState> {
     this.getApi();
   }
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     giphy_list: [],
-  //     searchword: "",
-  //     translate: "",
-  //     sourceLang: "en",
-  //     targetLang: "fr",
-  //     isCopiedSuccess: false,
-  //     giphy_image: ""
-  //   };
-  //   this.getApi();
-  // }
   searchTranslate = async (
     searchword: IsearchTranslate["searchword"],
     sourceLang: IsearchTranslate["sourceLang"],
