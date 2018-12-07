@@ -1,21 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-const Search = props => {
+interface ISearchProps {
+  searchGiphy: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+const Search = (props: ISearchProps) => {
   return (
     <section className="translateForm">
       <textarea
         onChange={props.searchGiphy}
         className="translateForm__box select"
-        type="text"
+        // type="text"
         placeholder="Search the word"
       />
     </section>
   );
-};
-
-Search.propTypes = {
-  searchGiphy: PropTypes.func
 };
 
 export default Search;

@@ -1,6 +1,15 @@
-import React from "react";
+import * as React from "react";
 
-const LanguageSelect = props => {
+interface ILanguageSelectProps {
+  handleSourceLang: (
+    event: React.SyntheticEvent<HTMLSelectElement | HTMLInputElement>
+  ) => void;
+  handleTargetLang: (
+    event: React.SyntheticEvent<HTMLSelectElement | HTMLInputElement>
+  ) => void;
+}
+
+const LanguageSelect = (props: ILanguageSelectProps) => {
   return (
     <section className="langSelect">
       <div className="langSelect__col">

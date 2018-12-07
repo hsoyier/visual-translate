@@ -1,7 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-const Translate = props => {
+interface ITranslateProps {
+  translate: string;
+}
+
+const Translate = (props: ITranslateProps) => {
   return (
     <section className="translateForm ">
       <div className="translateForm__box translate">
@@ -9,10 +12,6 @@ const Translate = props => {
       </div>
     </section>
   );
-};
-
-Translate.propTypes = {
-  translate: PropTypes.string
 };
 
 export default Translate;

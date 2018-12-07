@@ -2,8 +2,8 @@ import * as React from "react";
 
 interface IGiphysProps {
   searchword: string;
-  giphy_list: [string];
-  copyClipboard: () => void;
+  giphy_list: [any];
+  copyClipboard: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Giphys = (props: IGiphysProps) => {
@@ -13,24 +13,25 @@ const Giphys = (props: IGiphysProps) => {
       <ul className="giphy__list">
         {props.giphy_list.map(giphy => {
           return (
-            <li
-              className="giphy__item"
-              key={giphy.id}
-              style={{
-                backgroundImage: `url(
-                  ${giphy.images.fixed_height.url}
-                  )`
-              }}
-            >
-              <button
-                key={giphy.id}
-                className="btn__copy"
-                onClick={props.copyClipboard}
-                name={giphy.images.original.url}
-              >
-                <i className="fas fa-paperclip fa-lg" />
-              </button>
-            </li>
+            <div key="a">a</div>
+            // <li
+            //   className="giphy__item"
+            //   key={giphy.id}
+            //   style={{
+            //     backgroundImage: `url(
+            //       ${giphy.images.fixed_height.url}
+            //       )`
+            //   }}
+            // >
+            //   <button
+            //     key={giphy.id}
+            //     className="btn__copy"
+            //     onClick={props.copyClipboard}
+            //     name={giphy.images.original.url}
+            //   >
+            //     <i className="fas fa-paperclip fa-lg" />
+            //   </button>
+            // </li>
           );
         })}
       </ul>

@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 
-const Header = props => {
+const Header = () => {
   return (
     <header className="header">
       <div className="header__inner">
