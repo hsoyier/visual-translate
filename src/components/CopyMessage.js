@@ -5,8 +5,18 @@ const copyMessage = "Link copied to clipboard";
 const CopyMessage = props => {
   if (props.isCopiedSuccess) {
     return (
-      <div className="copyMessage">
-        <p className="copyMessage__text">{copyMessage}</p>
+      <div className="clipboard">
+        <div className="clipboard-inner">
+          <p className="clipboard__text">{copyMessage}</p>
+          <div
+            className="clipboard__image"
+            style={{
+              backgroundImage: `url(
+                  ${props.giphy_image}
+                  )`
+            }}
+          />
+        </div>
       </div>
     );
   } else {

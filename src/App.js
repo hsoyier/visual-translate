@@ -20,9 +20,10 @@ export default class App extends Component {
       giphy_list: [],
       searchword: "",
       translate: "",
-      message: "",
       sourceLang: "en",
-      targetLang: "fr"
+      targetLang: "fr",
+      isCopiedSuccess: false,
+      giphy_image: ""
     };
     this.getApi();
   }
@@ -88,13 +89,13 @@ export default class App extends Component {
     e.preventDefault();
     const el = document.createElement("textarea");
     el.value = e.target.name;
-    console.log(e.target.name);
     document.body.appendChild(el);
     el.select();
     document.execCommand("copy");
     document.body.removeChild(el);
     this.setState({
-      isCopiedSuccess: true
+      isCopiedSuccess: true,
+      giphy_image: el.value
     });
     setTimeout(() => {
       this.setState({ isCopiedSuccess: false });
@@ -104,24 +105,25 @@ export default class App extends Component {
     const {
       giphy_list,
       searchword,
-      supportedLanguages,
       translate,
-      message,
-      isCopiedSuccess
+      isCopiedSuccess,
+      giphy_image
     } = this.state;
     return (
       <div className="wrapper">
-        <CopyMessage isCopiedSuccess={isCopiedSuccess} />
+        <CopyMessage
+          isCopiedSuccess={isCopiedSuccess}
+          giphy_image={giphy_image}
+        />
         <div className="container">
           <Header />
           <LanguageSelect
             handleSourceLang={this.handleSourceLang}
             handleTargetLang={this.handleTargetLang}
-            supportedLanguages={supportedLanguages}
           />
           <div className="translateCol">
             <Search searchGiphy={this.searchGiphy} />
-            <Translate translate={translate} message={message} />
+            <Translate translate={translate} />
           </div>
           <Giphys
             giphy_list={giphy_list}

@@ -12,7 +12,6 @@ const Translate = props => {
 };
 
 Translate.propTypes = {
-  message: PropTypes.string,
   translate: PropTypes.string
 };
 
