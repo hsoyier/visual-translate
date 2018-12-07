@@ -38,7 +38,7 @@ export default class App extends Component {
       });
     }
   };
-  getApi = async e => {
+  getApi = async () => {
     const api_call = await fetch(
       `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
     );
@@ -86,8 +86,13 @@ export default class App extends Component {
   };
   copyClip = e => {
     e.preventDefault();
-    const copyTextarea = document.getElementById("js-copytextarea").value;
+    const el = document.createElement("textarea");
+    el.value = e.target.name;
+    console.log(e.target.name);
+    document.body.appendChild(el);
+    el.select();
     document.execCommand("copy");
+    document.body.removeChild(el);
     this.setState({
       isCopiedSuccess: true
     });
