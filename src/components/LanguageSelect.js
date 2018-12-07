@@ -8,7 +8,6 @@ const LanguageSelect = props => {
           className="langSelect__select"
           onChange={props.handleSourceLang}
         >
-          <option value="">from</option>
           <option value="en">English</option>
           <option value="es">Spanish</option>
           <option value="fr">French</option>
@@ -24,14 +23,6 @@ const LanguageSelect = props => {
           <option value="pl">Polish</option>
           <option value="th">Thai</option>
           <option value="tr">Turkish</option>
-
-          {/* {props.supportedLanguages.map((lang, index) => {
-            return (
-              <option key={index} value={lang.language}>
-                {Lang[index]}
-              </option>
-            );
-          })} */}
         </select>
       </div>
       <div className="langSelect__col">
@@ -39,10 +30,8 @@ const LanguageSelect = props => {
           className="langSelect__select"
           onChange={props.handleTargetLang}
         >
-          <option value="">to</option>
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
           <option value="fr">French</option>
+          <option value="es">Spanish</option>
           <option value="zh">Chinese</option>
           <option value="ru">Russian</option>
           <option value="ar">Arabic</option>
@@ -55,13 +44,7 @@ const LanguageSelect = props => {
           <option value="pl">Polish</option>
           <option value="th">Thai</option>
           <option value="tr">Turkish</option>
-          {/* {props.supportedLanguages.map((lang, index) => {
-            return (
-              <option key={index} value={lang.language}>
-                {Lang[index]}
-              </option>
-            );
-          })} */}
+          <option value="en">English</option>
         </select>
       </div>
     </section>

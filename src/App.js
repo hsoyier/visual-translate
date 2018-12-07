@@ -21,30 +21,14 @@ export default class App extends Component {
       searchword: "",
       translate: "",
       message: "",
-      sourceLang: "",
-      targetLang: "",
-      supportedLanguages: []
+      sourceLang: "en",
+      targetLang: "fr"
     };
     this.getApi();
-    // this.getSupportedLanguages();
   }
-  // getSupportedLanguages = async () => {
-  //   const response = await fetch(
-  //     `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY_GOOGLE_TRANSLATE}`
-  //   );
-  //   if (response.status === 200) {
-  //     const json = await response.json();
-  //     const supportedLanguages = json.data.languages;
-  //     this.setState({
-  //       supportedLanguages
-  //     });
-  //   }
-  // };
   searchTranslate = async (searchword, sourceLang, targetLang) => {
     const response = await fetch(
-      `https://translation.googleapis.com/language/translate/v2?q=${searchword}&source=${
-        this.state.sourceLang
-      }&target=${this.state.targetLang}&key=${API_KEY_GOOGLE_TRANSLATE}`
+      `https://translation.googleapis.com/language/translate/v2?q=${searchword}&source=${sourceLang}&target=${targetLang}&key=${API_KEY_GOOGLE_TRANSLATE}`
     );
     if (response.status === 200) {
       const json = await response.json();
@@ -56,10 +40,9 @@ export default class App extends Component {
   };
   getApi = async e => {
     const api_call = await fetch(
-      `http://api.giphy.com/v1/gifs/trending?api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
+      `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
     );
     const json = await api_call.json();
-    console.log(json);
     this.setState({
       giphy_list: json.data
     });
@@ -69,7 +52,7 @@ export default class App extends Component {
     const search = e.target.value;
     this.searchTranslate(search, this.state.sourceLang, this.state.targetLang);
     const api_call = await fetch(
-      `http://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
+      `https://api.giphy.com/v1/gifs/search?q=${search}&api_key=${API_KEY_GIPHY}&limit=${GIPHY_COUNT}`
     );
     const json = await api_call.json();
     this.setState({
@@ -80,26 +63,26 @@ export default class App extends Component {
   handleSourceLang = async e => {
     e.preventDefault();
     const sourceLang = e.target.value;
+    this.setState({
+      sourceLang
+    });
     this.searchTranslate(
       this.state.searchword,
       sourceLang,
       this.state.targetLang
     );
-    this.setState({
-      sourceLang
-    });
   };
   handleTargetLang = async e => {
     e.preventDefault();
     const targetLang = e.target.value;
+    this.setState({
+      targetLang
+    });
     this.searchTranslate(
       this.state.searchword,
       this.state.sourceLang,
       targetLang
     );
-    this.setState({
-      targetLang
-    });
   };
   copyClip = e => {
     e.preventDefault();
