@@ -7,7 +7,6 @@ import Header from "./components/Header";
 import LanguageSelect from "./components/LanguageSelect";
 import Search from "./components/Search";
 import Translate from "./components/Translate";
-
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 const API_KEY_GOOGLE_TRANSLATE = "AIzaSyCWGqzdzr8-hC9ADWYSBfuEPltHUIrekj4";
 const GIPHY_COUNT = 8;
@@ -119,7 +118,7 @@ export default class App extends React.Component<{}, IState> {
     });
     setTimeout(() => {
       this.setState({ isCopiedSuccess: false });
-    }, 60000);
+    }, 6000);
   };
   render() {
     const {
