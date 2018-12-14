@@ -65,20 +65,19 @@ Project is: _finished_
 ## Links
 
 - Project homepage: https://visual-translate.reiyoshizawa.com/
-- Repository: https://github.com/oyyer/visual-translate
-- Issue tracker: https://github.com/oyyer/visual-translate/issues
+- Repository: https://github.com/hsoyier/visual-translate
+- Issue tracker: https://github.com/hsoyier/visual-translate/issues
   - In case of sensitive bugs like security vulnerabilities, please contact
     reiyoshizawa0418@email.com directly instead of using issue tracker. We value your effort
     to improve the security and privacy of this project!
 - Related projects:
-  - Joy Event: https://github.com/oyyer/joyevent
-  - Visual Translate: https://github.com/oyyer/portfolio-react
+  - Joy Event: https://github.com/hsoyier/joyevent
 
 ## Contact
 
 Feel free to contact me!
 
 - Website - Rei Yoshizawa Portfolio Website (https://www.reiyoshizawa.com/)
-- Twitter - @oyyer\_ (https://twitter.com/oyyer_)
+- Twitter - @hsoyier\_ (https://twitter.com/hsoyier)
 
 [Back To The Top](#Visual-Translate)

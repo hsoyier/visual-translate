@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import LanguageSelect from "./components/LanguageSelect";
 import Search from "./components/Search";
 import Translate from "./components/Translate";
+// import { base } from "./config/config";
 const API_KEY_GIPHY = "GMn5DyhINWapdOlqjorRx7HhEBXj4qCZ";
 const API_KEY_GOOGLE_TRANSLATE = "AIzaSyCWGqzdzr8-hC9ADWYSBfuEPltHUIrekj4";
 const GIPHY_COUNT = 8;
@@ -28,19 +29,31 @@ interface IsearchTranslate {
 }
 
 export default class App extends React.Component<{}, IState> {
-  state: IState = {
-    giphy_image: "",
-    giphy_list: [""],
-    isCopiedSuccess: false,
-    searchword: "",
-    sourceLang: "en",
-    targetLang: "fr",
-    translate: ""
-  };
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      giphy_image: "",
+      giphy_list: [""],
+      isCopiedSuccess: false,
+      searchword: "",
+      sourceLang: "en",
+      targetLang: "fr",
+      translate: ""
+    };
+  }
 
   componentWillMount() {
     this.getApi();
+    // this.songRef = base.syncState("song", {
+    //   context: this,
+    //   state: "songs"
+    // });
   }
+
+  // componentWillUnmount() {
+  //   base.removeBinding(this.songRef);
+  // }
 
   searchTranslate = async (
     searchword: IsearchTranslate["searchword"],
